@@ -19,8 +19,9 @@ class UserIdentity extends CUserIdentity
 	{
 		$users=array(
 			// username => password
-			'demo'=>'demo',
-			'admin'=>'admin',
+			'dimon'=>'dimon',
+			'pavel'=>'pavel',
+			'matt'	=> 'matt'
 		);
 		if(!isset($users[$this->username]))
 			$this->errorCode=self::ERROR_USERNAME_INVALID;
@@ -29,5 +30,11 @@ class UserIdentity extends CUserIdentity
 		else
 			$this->errorCode=self::ERROR_NONE;
 		return !$this->errorCode;
+	}
+	
+	public static function getUserId( $sName ){
+		if( $sName == 'dimon' ) return 1;
+		if( $sName == 'pavel' ) return 2;
+		if( $sName == 'matt' ) return 3;
 	}
 }

@@ -12,7 +12,7 @@ Yii::import('bootstrap.widgets.input.BootInput');
 /**
  * Bootstrap active form widget.
  */
-class BootActiveForm extends CActiveForm
+class BootActiveForm extends IDPActiveForm
 {
 	// The different form types.
 	const TYPE_VERTICAL = 'vertical';
@@ -520,3 +520,4 @@ class BootActiveForm extends CActiveForm
 		}
 	}
 }
+?>

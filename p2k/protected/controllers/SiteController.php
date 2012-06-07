@@ -2,19 +2,24 @@
 
 class SiteController extends Controller
 {
+	private $aUrls = array(
+		array('label'=>'Home', 'url'=>'/', 'active'=>false),
+		array('label'=>'About', 'url'=>'/site/about', 'active'=>false),
+		array('label'=>'Table', 'url'=>'/site/table', 'active'=>false),
+	);
+	
 	/**
 	 * Declares class-based actions.
 	 */
-	public function actions()
-	{
+	public function actions() {
+		
 		return array(
-			// captcha action renders the CAPTCHA image displayed on the contact page
+			
 			'captcha'=>array(
 				'class'=>'CCaptchaAction',
 				'backColor'=>0xFFFFFF,
 			),
-			// page action renders "static" pages stored under 'protected/views/site/pages'
-			// They can be accessed via: index.php?r=site/page&view=FileName
+
 			'page'=>array(
 				'class'=>'CViewAction',
 			),
@@ -22,71 +27,124 @@ class SiteController extends Controller
 	}
 
 	/**
-	 * This is the default 'index' action that is invoked
-	 * when an action is not explicitly requested by users.
+	 * Основной индекс
+	 * 
 	 */
-	public function actionIndex()
-	{
-		// renders the view file 'protected/views/site/index.php'
-		// using the default layout 'protected/views/layouts/main.php'
-		$this->render('index');
+	public function actionIndex(){
+		
+
+		if( Yii::app()->user->isGuest ){
+			$sUserName = '%Username%';
+		} else {
+			$sUserName = Yii::app()->user->name;
+			$iUserId = UserIdentity::getUserId( $sUserName );
+
+		}
+
+		$oMatchList = new CActiveDataProvider(
+			'Match',
+			array(
+				'pagination' => array(
+					'pageSize' => 30,
+				),
+			)
+		);
+		
+		$this->render('index', array(
+			'sUserName' => $sUserName,
+			'oMatchList'	=> $oMatchList,
+		));
 	}
 
 	/**
-	 * This is the action to handle external exceptions.
+	 * Страница about
 	 */
-	public function actionError()
-	{
-	    if($error=Yii::app()->errorHandler->error)
-	    {
-	    	if(Yii::app()->request->isAjaxRequest)
-	    		echo $error['message'];
-	    	else
-	        	$this->render('error', $error);
-	    }
+	public function actionAbout(){
+		
+		$oUser = new User();
+		$oUser->setAttributes(array(
+			'name' => 'Pavel'
+		));
+		//$oUser->save();
+		
+		$this->render('about');
+	}
+	
+	/**
+	 * Таблица
+	 */
+	public function actionTable(){
+		
+		$oUserList = new CActiveDataProvider(
+			'User',
+			array(
+				'pagination' => array(
+					'pageSize' => 3,
+				),
+			)
+		);
+		
+		
+		$this->render('table', array(
+			'oUserList' => $oUserList
+		));
 	}
 
+		
 	/**
-	 * Displays the contact page
+	 * Верхняя менюшка
+	 * 
+	 * @return array 
 	 */
-	public function actionContact()
-	{
-		$model=new ContactForm;
-		if(isset($_POST['ContactForm']))
-		{
-			$model->attributes=$_POST['ContactForm'];
-			if($model->validate())
-			{
-				$headers="From: {$model->email}\r\nReply-To: {$model->email}";
-				mail(Yii::app()->params['adminEmail'],$model->subject,$model->body,$headers);
-				Yii::app()->user->setFlash('contact','Thank you for contacting us. We will respond to you as soon as possible.');
-				$this->refresh();
+	public function getMenu(){
+		
+		
+		foreach( $this->aUrls as $key => $aItem ) {
+			if( $aItem['url'] == '/'.Yii::app()->request->getPathInfo()  ) {
+				$this->aUrls[$key]['active'] = true;
 			}
 		}
-		$this->render('contact',array('model'=>$model));
+		
+		$aMenu = array(
+			array(
+				'class'=>'bootstrap.widgets.BootMenu',
+				'items'=> $this->aUrls
+			),
+
+			array(
+				'class'=>'bootstrap.widgets.BootMenu',
+				'htmlOptions'=>array('class'=>'pull-right'),
+				'items'=>array(
+					array('label'=>'Login', 'url'=>'/site/login'),
+		
+					
+				),
+			),
+			
+		);
+		
+		return $aMenu;
 	}
 
 	/**
 	 * Displays the login page
 	 */
-	public function actionLogin()
-	{
+	public function actionLogin() {
+		
 		$model=new LoginForm;
 
 		// if it is ajax validation request
-		if(isset($_POST['ajax']) && $_POST['ajax']==='login-form')
-		{
+		if(isset($_POST['ajax']) && $_POST['ajax']==='login-form') {
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
 		}
 
 		// collect user input data
-		if(isset($_POST['LoginForm']))
-		{
+		if(isset($_POST['LoginForm'])) {
 			$model->attributes=$_POST['LoginForm'];
 			// validate user input and redirect to the previous page if valid
 			if($model->validate() && $model->login())
-				$this->redirect(Yii::app()->user->returnUrl);
+				$this->redirect('/');
 		}
 		// display the login form
 		$this->render('login',array('model'=>$model));
@@ -95,9 +153,13 @@ class SiteController extends Controller
 	/**
 	 * Logs out the current user and redirect to homepage.
 	 */
-	public function actionLogout()
-	{
+	public function actionLogout() {
 		Yii::app()->user->logout();
-		$this->redirect(Yii::app()->homeUrl);
+		
+		$this->redirect('/');
+	}
+	
+	public function actionBet(){
+		
 	}
 }

@@ -1,33 +1,31 @@
 <?php $this->pageTitle=Yii::app()->name; ?>
 
-<br/>
-<br/>
-<br/>
-<?php 
-echo "Hi $sUserName";
-?>
-
-<h1>Таблица</h1>
+<br />
+<br />
+<br />
+<h1>Турнирная таблица</h1>
 
 <table class="table">
 	<tr>
-		<th>id</th>
-		<th>Дата</th>
-		<th>Хозяева</th>
-		<th>Гости</th>
+		<th>Имя</th>
+		<th>Литры</th>
+
 	</tr>
 <?php 
-
+/*
 $this->widget('bootstrap.widgets.BootThumbs', array(
-    'dataProvider'=>$oMatchList,
+    'dataProvider'=>$oUserList,
     'template'=>'{items}<tr><td colspan="10">{pager}</td></tr>',
-    'itemView'=>'_match',
+    'itemView'=>'_item',
     // Remove the existing tooltips and rebind the plugin after each ajax-call.
     'afterAjaxUpdate'=>"js:function() {
         jQuery('.tooltip').remove();
         jQuery('a[rel=tooltip]').tooltip();
     }",
 )); 
-
+*/
 ?>
 </table>
+
+<br />
+
