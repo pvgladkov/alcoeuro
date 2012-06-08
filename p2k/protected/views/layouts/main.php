@@ -13,8 +13,9 @@
 
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/main.css" />
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/form.css" />
-	<script src="/js/script.js"></script>
 	<script src="/js/jquery.min.js"></script>
+	<script src="/js/script.js"></script>
+	
 	<link href="/images/avatar_6b2e3101695b_16.png" rel="shortcut icon" />
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
 </head>
