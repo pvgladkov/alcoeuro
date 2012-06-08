@@ -191,7 +191,8 @@ class SiteController extends Controller
 				$oUSerMatch->bet = $bBet;
 				$oUSerMatch->is_done = 1;
 				$oUSerMatch->save();
-				echo 'ok';
+				
+				echo UserIdentity::getUserName($iUserId);
 			}
 
 		}

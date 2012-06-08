@@ -14,7 +14,13 @@ function bet( match_id, bet ){
 			'bet': bet
 		},
 		function(data){
-			
+			if( data > 0 ){
+				if( bet == 0 ){
+					$(this).children('.home').html(data);
+				} else {
+					$(this).children('.away').html(data);
+				}
+			}
 		}
 	);
 }
