@@ -1,7 +1,7 @@
 $(document).ready(function() {
 	
 	
-	$('.ar').click(function(){
+	$('.ar bet').click(function(){
 		bet(1,1);
 	})
 });
