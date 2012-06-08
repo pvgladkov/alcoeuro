@@ -167,6 +167,9 @@ class SiteController extends Controller
 		$this->redirect('/');
 	}
 	
+	/**
+	 * аяксовая голосовалка
+	 */
 	public function actionBet(){
 		
 		if( !Yii::app()->user->isGuest ){
@@ -176,8 +179,21 @@ class SiteController extends Controller
 		
 			$iUserId = UserIdentity::getUserId( Yii::app()->user->name );
 		
-			echo $iUserId;
-		
+			$aMyMatches = UserMatch::model()->findAllByAttributes(
+				array( 'user_id' => $iUserId ),
+				array( 'index'	=> 'match_id' )
+			);
+			$aMyMatchesIds = array_keys( $aMyMatches );
+			
+			if( in_array( $iMatchId, $aMyMatchesIds ) ){
+				// проставить
+				$oUSerMatch = UserMatch::model()->findByAttributes(array( 'match_id' => $iMatchId ));
+				$oUSerMatch->bet = $bBet;
+				$oUSerMatch->is_done = 1;
+				$oUSerMatch->save();
+				echo 'ok';
+			}
+
 		}
 		
 	}
