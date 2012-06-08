@@ -112,7 +112,7 @@ class SiteController extends Controller
 			),
 		);
 		
-		if( Yii::app()->user->isGuest() ){
+		if( Yii::app()->user->isGuest ){
 			$aMenu[] = array(
 				'class'=>'bootstrap.widgets.BootMenu',
 				'htmlOptions'=>array('class'=>'pull-right'),
