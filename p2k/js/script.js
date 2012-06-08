@@ -2,7 +2,7 @@ $(document).ready(function() {
 	
 	
 	$('.bet').click(function(){
-		bet( $(this).parent().children('.match-id').text(), $(this).data('data'));
+		bet( $(this).parent().children('.match-id').text(), $(this).attr('data'));
 	})
 });
 
