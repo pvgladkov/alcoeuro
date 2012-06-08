@@ -121,6 +121,14 @@ class SiteController extends Controller
 				),
 			);
 
+		} else {
+			$aMenu[] = array(
+				'class'=>'bootstrap.widgets.BootMenu',
+				'htmlOptions'=>array('class'=>'pull-right'),
+				'items'=>array(
+					array('label'=>'Logout', 'url'=>'/site/logout'),
+				),
+			);
 		}
 		
 		return $aMenu;
