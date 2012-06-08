@@ -36,8 +36,8 @@ if( $oUserMatch ){
 
 <tr class="<?= $sClass?>">
 
-	<td class="ar"><?php echo $data->id ?></td>
-	<td class="ar"><?php echo $data->date ?></td>
+	<td class="ar match-id"><?php echo $data->id ?></td>
+	<td class="ar "><?php echo $data->date ?></td>
 	<td class="ar bet" data="0" ><?php echo $aBet[0].' '. $data->home ?></td>
 	<td class="ar bet" data="1" ><?php echo $aBet[1].' '. $data->away ?></td>
 </tr>
