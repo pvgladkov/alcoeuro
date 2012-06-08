@@ -169,5 +169,16 @@ class SiteController extends Controller
 	
 	public function actionBet(){
 		
+		if( !Yii::app()->user->isGuest ){
+			
+			$iMatchId = Yii::app()->request->getParam('match_id');
+			$bBet = Yii::app()->request->getParam('bet');
+		
+			$iUserId = UserIdentity::getUserId( Yii::app()->user->name );
+		
+			echo $iUserId;
+		
+		}
+		
 	}
 }
