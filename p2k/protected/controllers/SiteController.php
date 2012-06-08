@@ -110,18 +110,18 @@ class SiteController extends Controller
 				'class'=>'bootstrap.widgets.BootMenu',
 				'items'=> $this->aUrls
 			),
-
-			array(
+		);
+		
+		if( Yii::app()->user->isGuest() ){
+			$aMenu[] = array(
 				'class'=>'bootstrap.widgets.BootMenu',
 				'htmlOptions'=>array('class'=>'pull-right'),
 				'items'=>array(
 					array('label'=>'Login', 'url'=>'/site/login'),
-		
-					
 				),
-			),
-			
-		);
+			);
+
+		}
 		
 		return $aMenu;
 	}
