@@ -26,11 +26,10 @@ $oUserMatch = UserMatch::model()->findByAttributes(array('match_id' => $data->id
 
 if( $oUserMatch ){
 	if( $oUserMatch->is_done ){
-		$aBet[ $oUserMatch->bet ] = 'bet';
+		
+		$aBet[ $oUserMatch->bet ] = UserIdentity::getUserName( $oUserMatch->user_id);
 	}
 }
-
-
 
 ?>
 
@@ -38,7 +37,7 @@ if( $oUserMatch ){
 <tr class="<?= $sClass?>">
 
 	<td class="ar"><?php echo $data->id ?></td>
-	<td class="ar"><?php echo $data->date ?></td>
-	<td class="ar"><?php echo $data->home . " " . $aBet[0] ?></td>
-	<td class="ar"><?php echo $data->away . " " . $aBet[1] ?></td>
+	<td class="ar"><?php echo $aBet[0].' '. $data->date ?></td>
+	<td class="ar"><?php echo $aBet[1].' '. $data->home ?><></td>
+	<td class="ar"><?php echo $data->away ?><></td>
 </tr>

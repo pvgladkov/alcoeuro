@@ -37,4 +37,10 @@ class UserIdentity extends CUserIdentity
 		if( $sName == 'pavel' ) return 2;
 		if( $sName == 'matt' ) return 3;
 	}
+	
+	public static function getUserName( $iUserId ){
+		if( $sName == 1 ) return 'Дима';
+		if( $sName == 2 ) return 'Павел';
+		if( $sName == 3 ) return 'Матвей';
+	}
 }
