@@ -17,6 +17,9 @@ if( in_array( $data->id, $aMyMatchesIds ) &&  !$aMyMatches[$data->id]->is_done )
 	$sClass = 'bgreen';
 }
 
+$sLabelClass = 'label-info';
+
+
 $aBet = array(
 	0 => '',
 	1 => ''
@@ -28,6 +31,11 @@ if( $oUserMatch ){
 	if( $oUserMatch->is_done ){
 		
 		$aBet[ $oUserMatch->bet ] = UserIdentity::getUserName( $oUserMatch->user_id);
+		if( $oUserMatch->checkMatch() == 'yes' ){
+			$sLabelClass = 'label-success';
+		} else {
+			$sLabelClass = 'label-important';
+		}
 	}
 }
 
@@ -42,7 +50,7 @@ if( $oUserMatch ){
 		
 			<span class="home" id="<?php echo $data->id.'-home' ?>">
 			<?php if( $aBet[0] ){ ?>
-				<span class="label label-info">
+				<span class="label <?=$sLabelClass?>">
 					<?php echo $aBet[0].' '?>
 				</span>	
 			<?php } ?>
@@ -56,7 +64,7 @@ if( $oUserMatch ){
 		<span class="away" id="<?php echo $data->id.'-away' ?>" >
 		
 		<?php if( $aBet[1] ){ ?>
-			<span class="label label-info">
+			<span class="label <?=$sLabelClass?>">
 				<?php echo $aBet[1].' '?>
 			</span>	
 		<?php } ?>
