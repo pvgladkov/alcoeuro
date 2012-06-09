@@ -75,18 +75,34 @@ class SiteController extends Controller
 	 */
 	public function actionTable(){
 		
-		$oUserList = new CActiveDataProvider(
-			'User',
-			array(
-				'pagination' => array(
-					'pageSize' => 3,
-				),
-			)
-		);
+		$aStat = array(
+			1 => 0,
+			2 => 0,
+			3 => 0,
+			4 => 0,
+		);	
+		
+		$aUserMatches = UserMatch::model()->findAll();
+		
+		foreach( $aUserMatches as $oUserMatch){
+			if( $oUserMatch->checkMatch() == 'yes' ){
+				$aStat[ $oUserMatch->user_id ]++;
+			}
+			
+			if( $oUserMatch->checkMatch() == 'no' ){
+				for( $i = 1; $i < 5; $i++ ){
+					if( $i == $oUserMatch->user_id ){
+						continue;
+					}
+					$aStat[ $i ]++;
+				}
+				
+			}
+		}
 		
 		
 		$this->render('table', array(
-			'oUserList' => $oUserList
+			'aStat' => $aStat
 		));
 	}
 
@@ -186,16 +202,23 @@ class SiteController extends Controller
 			$aMyMatchesIds = array_keys( $aMyMatches );
 			
 			if( in_array( $iMatchId, $aMyMatchesIds ) ){
-				// проставить
-				$oUSerMatch = UserMatch::model()->findByAttributes(array( 'match_id' => $iMatchId ));
-				$oUSerMatch->bet = $bBet;
-				$oUSerMatch->is_done = 1;
-				$oUSerMatch->save();
 				
-				echo UserIdentity::getUserName($iUserId);
+				$oMatch = Match::model()->findByPk( $iMatchId );
+				// время не ислекло
+				if(strtotime($oMatch->date) >= date(mktime()) ){
+					// проставить
+					$oUSerMatch = UserMatch::model()->findByAttributes(array( 'match_id' => $iMatchId ));
+					$oUSerMatch->bet = $bBet;
+					$oUSerMatch->is_done = 1;
+					$oUSerMatch->save();
+
+					echo UserIdentity::getUserName($iUserId);
+				}
+				
 			}
 
 		}
 		
+		echo '';
 	}
 }

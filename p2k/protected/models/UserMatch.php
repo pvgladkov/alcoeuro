@@ -83,6 +83,29 @@ class UserMatch extends CActiveRecord
 		));
 	}
 	
+	/**
+	 * Проверка результата
+	 * @return string
+	 */
+	public function checkMatch(){
+		
+		$oMatch = Match::model()->findByPk( $this->match_id );
+		
+		if( $oMatch->home_score == $oMatch->away_score ){
+			return 'draw';
+		}
+		
+		if( $oMatch->home_score > $oMatch->away_score  && $this->bet == 0 ){
+			return 'yes';
+		}
+		
+		if( $oMatch->home_score < $oMatch->away_score  && $this->bet == 1 ){
+			return 'yes';
+		}
+		
+		return 'no';
+	}
+	
 }
 
 ?>

@@ -14,11 +14,14 @@ function bet( match_id, bet ){
 			'bet': bet
 		},
 		function(data){
-			if( data > 0 ){
+			
+			if( data != '' ){
+				$('#'+match_id+'-home').html('');
+				$('#'+match_id+'-away').html('');
 				if( bet == 0 ){
-					$(this).children('.home').html(data);
+					$('#'+match_id+'-home').html(data);
 				} else {
-					$(this).children('.away').html(data);
+					$('#'+match_id+'-away').html(data);
 				}
 			}
 		}

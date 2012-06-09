@@ -39,12 +39,12 @@ if( $oUserMatch ){
 	<td class="ar match-id"><?php echo $data->id ?></td>
 	<td class="ar "><?php echo $data->date ?></td>
 	<td class="ar bet" data="0" >
-		<div class="home">
+		<div class="home" id="<?php echo $data->id.'-home' ?>">
 			<?php echo $aBet[0].' '?>
 		</div><?php echo $data->home ?>
 	</td>
 	<td class="ar bet" data="1" >
-		<div class="away">
+		<div class="away" id="<?php echo $data->id.'-away' ?>" >
 			<?php echo $aBet[1].' '?>
 		</div><?php echo $data->away ?>
 	</td>

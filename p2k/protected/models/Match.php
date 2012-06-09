@@ -79,6 +79,8 @@ class Match extends CActiveRecord
 		));
 	}
 	
+
+	
 }
 
 ?>

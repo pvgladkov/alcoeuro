@@ -9,8 +9,23 @@
 	<tr>
 		<th>Имя</th>
 		<th>Литры</th>
-
 	</tr>
+	<tr>
+		<th>Дима</th>
+		<th><?= $aStat[1]?></th>
+	<tr>
+		<th>Павел</th>
+		<th><?= $aStat[2]?></th>
+	</tr>
+	<tr>
+		<th>Матвей</th>
+		<th><?= $aStat[3]?></th>
+	</tr>
+	<tr>
+		<th>Жора</th>
+		<th><?= $aStat[4]?></th>
+	</tr>
+
 <?php 
 /*
 $this->widget('bootstrap.widgets.BootThumbs', array(
