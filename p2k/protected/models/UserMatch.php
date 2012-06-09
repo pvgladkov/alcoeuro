@@ -91,6 +91,11 @@ class UserMatch extends CActiveRecord
 		
 		$oMatch = Match::model()->findByPk( $this->match_id );
 		
+		// матч начался, а ставка не сделана
+		if( strtotime($oMatch->date) < date(mktime()) && !$this->is_done ){
+			return 'no';
+		}
+		
 		if( $oMatch->home_score == $oMatch->away_score ){
 			return 'draw';
 		}
