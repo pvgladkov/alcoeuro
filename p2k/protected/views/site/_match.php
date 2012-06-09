@@ -31,12 +31,19 @@ if( $oUserMatch ){
 	if( $oUserMatch->is_done ){
 		
 		$aBet[ $oUserMatch->bet ] = UserIdentity::getUserName( $oUserMatch->user_id);
-		if( $oUserMatch->checkMatch() == 'yes' ){
-			$sLabelClass = 'label-success';
-		} else {
-			$sLabelClass = 'label-important';
+		$oMatch = Match::model()->findByPk( $data->id );
+		if(strtotime($oMatch->date) < date(mktime()) ){
+			if( $oUserMatch->checkMatch() == 'yes' ){
+				$sLabelClass = 'label-success';
+			} 
+			if( $oUserMatch->checkMatch() == 'draw' ) {
+				$sLabelClass = 'label-warning';
+			} else {
+				$sLabelClass = 'label-important';
+			}
 		}
 	}
+	
 }
 
 ?>
