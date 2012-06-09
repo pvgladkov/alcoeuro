@@ -212,7 +212,7 @@ class SiteController extends Controller
 					$oUSerMatch->is_done = 1;
 					$oUSerMatch->save();
 
-					echo UserIdentity::getUserName($iUserId);
+					echo '<span class="label label-info">'.UserIdentity::getUserName($iUserId).'</span>';
 				}
 				
 			}

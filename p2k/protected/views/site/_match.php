@@ -38,14 +38,27 @@ if( $oUserMatch ){
 
 	<td class="ar match-id"><?php echo $data->id ?></td>
 	<td class="ar "><?php echo $data->date ?></td>
-	<td class="ar bet" data="0" >
-		<div class="home" id="<?php echo $data->id.'-home' ?>">
-			<?php echo $aBet[0].' '?>
-		</div><img height="15" width="22"  src="/images/flags/<?php echo $data->home ?>.png" /><?php echo $data->home ?>
+	<td class="ar bet" data="0">
+		
+			<span class="home" id="<?php echo $data->id.'-home' ?>">
+			<?php if( $aBet[0] ){ ?>
+				<span class="label label-info">
+					<?php echo $aBet[0].' '?>
+				</span>	
+			<?php } ?>
+		</span>&nbsp;
+		<img height="15" width="22"  src="/images/flags/<?php echo $data->home ?>.png" />&nbsp;<?php echo $data->home ?>
 	</td>
 	<td class="ar bet" data="1" >
-		<div class="away" id="<?php echo $data->id.'-away' ?>" >
-			<?php echo $aBet[1].' '?>
-		</div><img height="15" width="22"  src="/images/flags/<?php echo $data->away ?>.png" /><?php echo $data->away ?>
+		
+		<span class="away" id="<?php echo $data->id.'-away' ?>" >
+		
+		<?php if( $aBet[1] ){ ?>
+			<span class="label label-info">
+				<?php echo $aBet[1].' '?>
+			</span>	
+		<?php } ?>
+		</span>&nbsp;
+		<img height="15" width="22"  src="/images/flags/<?php echo $data->away ?>.png" />&nbsp;<?php echo $data->away ?>
 	</td>
 </tr>

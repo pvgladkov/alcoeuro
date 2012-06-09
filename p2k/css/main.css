@@ -540,7 +540,7 @@ div.ui-tabs { border: 0; }
 a.fgray, fgray, .fgray td, .fray a, .fray td a { color: gray; }
 span.note { font-size: 10px; color: gray; }
 table.table th.ac, table.table td.ac, .ac { text-align: center; }
-table.table th.ar, table.table td.ar, .ar { text-align: right; }
+table.table th.ar, table.table td.ar, .ar { text-align: center; }
 table.table th.bnone, table.table td.bnone, .bnone { background-color: #fff; }
 .ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button, .ui-tabs { font-family: Arial; font-size: 12px; }
 input.AutoSelectText { border:1px solid #DCDCDC; font-size: 10px; font-family: Arial; }
