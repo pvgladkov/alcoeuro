@@ -51,6 +51,8 @@ if( $oUserMatch ){
 	</td>
 	<td class="ar bet" data="1" >
 		
+		
+		<img height="15" width="22"  src="/images/flags/<?php echo $data->away ?>.png" />&nbsp;<?php echo $data->away ?>
 		<span class="away" id="<?php echo $data->id.'-away' ?>" >
 		
 		<?php if( $aBet[1] ){ ?>
@@ -59,6 +61,6 @@ if( $oUserMatch ){
 			</span>	
 		<?php } ?>
 		</span>&nbsp;
-		<img height="15" width="22"  src="/images/flags/<?php echo $data->away ?>.png" />&nbsp;<?php echo $data->away ?>
 	</td>
+	
 </tr>

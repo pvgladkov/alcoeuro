@@ -563,6 +563,14 @@ div.subtitle {
 	
 }
 
+.away{
+	text-align: left;
+}
+
+.home{
+	text-align: right;
+}
+
 pre.results
 {
 	overflow: auto;
