@@ -36,7 +36,7 @@ if( $oUserMatch ){
 			if( $oUserMatch->checkMatch() == 'yes' ){
 				$sLabelClass = 'label-success';
 			} 
-			if( $oUserMatch->checkMatch() == 'draw' ) {
+			elseif( $oUserMatch->checkMatch() == 'draw' ) {
 				$sLabelClass = 'label-warning';
 			} else {
 				$sLabelClass = 'label-important';
