@@ -41,11 +41,11 @@ if( $oUserMatch ){
 	<td class="ar bet" data="0" >
 		<div class="home" id="<?php echo $data->id.'-home' ?>">
 			<?php echo $aBet[0].' '?>
-		</div><?php echo $data->home ?>
+		</div><img height="15" width="22"  src="/images/flags/<?php echo $data->home ?>.png" /><?php echo $data->home ?>
 	</td>
 	<td class="ar bet" data="1" >
 		<div class="away" id="<?php echo $data->id.'-away' ?>" >
 			<?php echo $aBet[1].' '?>
-		</div><?php echo $data->away ?>
+		</div><img height="15" width="22"  src="/images/flags/<?php echo $data->away ?>.png" /><?php echo $data->away ?>
 	</td>
 </tr>
