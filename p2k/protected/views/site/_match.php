@@ -52,18 +52,21 @@ if( $oUserMatch ){
 <tr class="<?= $sClass?>">
 
 	<td class="ar match-id"><?php echo $data->id ?></td>
-	<td class="ar "><?php echo $data->date ?></td>
-	<td class="ar bet" data="0">
-		
+	<td class="ar "><?php echo TransDataComponent::getHumanDateTime($data->date) ?></td>
+	
+	<td class="ar bet" data="0" >
+			
 			<span class="home" id="<?php echo $data->id.'-home' ?>">
 			<?php if( $aBet[0] ){ ?>
 				<span class="label <?=$sLabelClass?>">
 					<?php echo $aBet[0].' '?>
 				</span>	
 			<?php } ?>
-		</span>&nbsp;
+			</span>&nbsp;
+			
 		<img height="15" width="22"  src="/images/flags/<?php echo $data->home ?>.png" />&nbsp;<?php echo $data->home ?>
 	</td>
+	
 	<td class="ar bet" data="1" >
 		
 		

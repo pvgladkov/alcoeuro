@@ -556,7 +556,12 @@ div.subtitle {
 }
 
 .bet{
-	
+	cursor: pointer;
+}
+
+table.tble td:hover, td:focus, td:active {
+	z-index: 99999;
+	background-color: yellow;
 }
 
 .match-id{
