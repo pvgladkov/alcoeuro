@@ -28,7 +28,7 @@
 		</td>
 		<td width="25%"> 
 	
-			<table class="tabel table-bordered" style="position: fixed; width: 20%; top: 103px">
+			<table class="tabel table-bordered table-striped" style="position: fixed; width: 20%; top: 103px">
 
 				<?php foreach( $aSt as $st ) {?>
 				<tr>
