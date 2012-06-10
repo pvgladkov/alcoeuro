@@ -3,11 +3,8 @@
 <br/>
 <br/>
 <br/>
-<?php 
-echo "Hi $sUserName";
-?>
 
-<h1>Таблица</h1>
+<h2>Групповой этап</h2>
 
 <table class="table">
 	<tr>

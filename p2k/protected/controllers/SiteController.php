@@ -3,9 +3,10 @@
 class SiteController extends Controller
 {
 	private $aUrls = array(
-		array('label'=>'Home', 'url'=>'/', 'active'=>false),
-		array('label'=>'About', 'url'=>'/site/about', 'active'=>false),
-		array('label'=>'Table', 'url'=>'/site/table', 'active'=>false),
+		//array('label'=>'Home', 'url'=>'/', 'active'=>false),
+		array('label'=>'Алкорейтинг', 'url'=>'/site/table', 'active'=>false),
+		array('label'=>'О нас', 'url'=>'/site/about', 'active'=>false),
+		
 	);
 	
 	/**
