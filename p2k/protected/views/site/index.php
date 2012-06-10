@@ -7,12 +7,7 @@
 <h2>Групповой этап</h2>
 
 <table class="table table-bordered">
-	<tr class="alert alert-info" style="color:black">
-		<th>id</th>
-		<th>Дата</th>
-		<th>Хозяева</th>
-		<th>Гости</th>
-	</tr>
+
 <?php 
 
 $this->widget('bootstrap.widgets.BootThumbs', array(
