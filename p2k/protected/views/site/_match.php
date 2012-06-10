@@ -12,9 +12,9 @@ if( !Yii::app()->user->isGuest ){
 }
 
 if( in_array( $data->id, $aMyMatchesIds ) ){
-	$sClass = 'bred';
+	$sClass = 'alert alert-error';
 } else {
-	$sClass = 'bgreen';
+	$sClass = 'alert alert-success';
 }
 
 $sLabelClass = 'label-info';
@@ -57,7 +57,7 @@ if(strtotime($data->date) >= date(mktime()) + 90*60 ){
 ?>
 
 
-<tr class="<?= $sClass?>">
+<tr class="<?= $sClass?>" style="color:black">
 
 	<td class="ar match-id"><?php echo $data->id ?></td>
 	<td class="ar "><?php echo TransDataComponent::getHumanDateTime($data->date) ?></td>

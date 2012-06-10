@@ -5,16 +5,15 @@
 <br />
 <h2>Алкорейтинг</h2>
 
-<table class="table">
-	<tr>
-		<th>Имя</th>
-		<th>Литры</th>
-	</tr>
+<table class="tabel table-bordered table-striped">
+
 	<?php foreach( $aSt as $st ) {?>
-		<tr>
-			<th><?php echo UserIdentity::getUserName($st['id'])?></th>
-			<th><?= $st['score']?></th>
-		<tr>
+	<tr>
+		
+			<td class="ar"><?php echo UserIdentity::getUserName($st['id'])?></td>
+			<td class="ar"><?= $st['score']?></td>
+		
+	</tr>
 	<?php }?>
 
 <?php 

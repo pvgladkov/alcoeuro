@@ -6,8 +6,8 @@
 
 <h2>Групповой этап</h2>
 
-<table class="table">
-	<tr>
+<table class="table table-bordered">
+	<tr class="alert alert-info" style="color:black">
 		<th>id</th>
 		<th>Дата</th>
 		<th>Хозяева</th>
