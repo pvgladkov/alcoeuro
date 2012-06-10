@@ -46,6 +46,14 @@ if( $oUserMatch ){
 	
 }
 
+if(strtotime($data->date) >= date(mktime()) + 90*60*60 ){
+	$sHomeScore = ' - ';
+	$sAwayScore = ' - ';
+}else {
+	$sHomeScore = ' '.$data->home_score.' ';
+	$sAwayScore = ' '.$data->away_score.' ';
+}
+
 ?>
 
 
@@ -65,10 +73,12 @@ if( $oUserMatch ){
 			</span>&nbsp;
 			
 		<?php echo $data->home ?>&nbsp;<img height="15" width="22"  src="/images/flags/<?php echo $data->home ?>.png" />&nbsp;
+		<span style="font-weight: bold;"><?=$sHomeScore?></span>
 	</td>
 	
 	<td class="ar bet" data="1" style="text-align:left;">
 		
+		<span style="font-weight: bold;"><?=$sAwayScore?></span>
 		
 		&nbsp<img height="15" width="22"  src="/images/flags/<?php echo $data->away ?>.png" />&nbsp;<?php echo $data->away ?>
 		<span class="away" id="<?php echo $data->id.'-away' ?>" >
