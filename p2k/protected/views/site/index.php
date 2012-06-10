@@ -41,7 +41,7 @@
 				<tr>
 
 						<td class="ar" style="font-weight: bold">Пиво на финал</td>
-						<td class="ar" style="font-weight: bold"><?php echo ($aSt[0]['score']-$aSt[3]['score'])/2 .'л'?></td>
+						<td class="ar" style="font-weight: bold"><?php echo ($aSt[0]['score']-$aSt[3]['score'])/2 .' л'?></td>
 
 				</tr>
 			</table>

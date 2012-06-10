@@ -32,7 +32,7 @@ if( $oUserMatch ){
 		
 		$aBet[ $oUserMatch->bet ] = UserIdentity::getUserName( $oUserMatch->user_id);
 		$oMatch = Match::model()->findByPk( $data->id );
-		if((strtotime($data->date)+90*60) >= (date(mktime()))){
+		if(strtotime($data->date) >= date(mktime()) + 90*60 ){
 			if( $oUserMatch->checkMatch() == 'yes' ){
 				$sLabelClass = 'label-success';
 			} 
