@@ -54,7 +54,7 @@ if( $oUserMatch ){
 	<td class="ar match-id"><?php echo $data->id ?></td>
 	<td class="ar "><?php echo TransDataComponent::getHumanDateTime($data->date) ?></td>
 	
-	<td class="ar bet" data="0" >
+	<td class="ar bet" data="0" style="text-align:right;">
 			
 			<span class="home" id="<?php echo $data->id.'-home' ?>">
 			<?php if( $aBet[0] ){ ?>
@@ -64,13 +64,13 @@ if( $oUserMatch ){
 			<?php } ?>
 			</span>&nbsp;
 			
-		<img height="15" width="22"  src="/images/flags/<?php echo $data->home ?>.png" />&nbsp;<?php echo $data->home ?>
+		<?php echo $data->home ?>&nbsp;<img height="15" width="22"  src="/images/flags/<?php echo $data->home ?>.png" />&nbsp;
 	</td>
 	
-	<td class="ar bet" data="1" >
+	<td class="ar bet" data="1" style="text-align:left;">
 		
 		
-		<img height="15" width="22"  src="/images/flags/<?php echo $data->away ?>.png" />&nbsp;<?php echo $data->away ?>
+		&nbsp<img height="15" width="22"  src="/images/flags/<?php echo $data->away ?>.png" />&nbsp;<?php echo $data->away ?>
 		<span class="away" id="<?php echo $data->id.'-away' ?>" >
 		
 		<?php if( $aBet[1] ){ ?>
