@@ -46,7 +46,7 @@ if( $oUserMatch ){
 	
 }
 
-if((strtotime($data->date)+90*60) >= (date(mktime())) ){
+if( !$data->get_result ){
 	$sHomeScore = ' - ';
 	$sAwayScore = ' - ';
 }else {
