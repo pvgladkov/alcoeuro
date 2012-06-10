@@ -51,9 +51,12 @@ class SiteController extends Controller
 			)
 		);
 		
+		$sSt = UserMatch::getStat();
+		
 		$this->render('index', array(
 			'sUserName' => $sUserName,
 			'oMatchList'	=> $oMatchList,
+			'aSt'			=> $sSt
 		));
 	}
 
@@ -76,59 +79,13 @@ class SiteController extends Controller
 	 */
 	public function actionTable(){
 		
-		$aStat = array(
-			1 => 0,
-			2 => 0,
-			3 => 0,
-			4 => 0,
-		);	
-		
-		$aUserMatches = UserMatch::model()->findAll();
-		
-		foreach( $aUserMatches as $oUserMatch){
-			if( $oUserMatch->checkMatch() == 'yes' ){
-				$aStat[ $oUserMatch->user_id ]++;
-			}
-			
-			if( $oUserMatch->checkMatch() == 'no' ){
-				for( $i = 1; $i < 5; $i++ ){
-					if( $i == $oUserMatch->user_id ){
-						continue;
-					}
-					$aStat[ $i ]++;
-				}
-				
-			}
-		}
-		
-		$aSt = array();
-		
-		foreach( $aStat as $key=>$val ){
-			$aSt[] = array(
-				'id' => $key,
-				'score' => $val
-			);
-		}
-		
-		for( $i=0; $i< 4; $i++){
-			for( $j=$i; $j< 4; $j++){
-				if( $aSt[$j]['score'] > $aSt[$i]['score'] ){
-					// меняем
-					$aTmp['id'] = $aSt[$j]['id'];
-					$aTmp['score'] = $aSt[$j]['score'];
-					$aSt[$j]['id'] = $aSt[$i]['id'];
-					$aSt[$j]['score'] = $aSt[$i]['score'];
-					$aSt[$i]['id'] = $aTmp['id'];
-					$aSt[$i]['score'] = $aTmp['score'];
-				}
-			}
-		}
+		$aSt = UserMatch::getStat();
 		
 		//var_dump($aSt);
 		//die();
 		
 		$this->render('table', array(
-			'aStat' => $aStat,
+			//'aStat' => $aStat,
 			'aSt' => $aSt
 		));
 	}

@@ -16,20 +16,6 @@
 	</tr>
 	<?php }?>
 
-<?php 
-/*
-$this->widget('bootstrap.widgets.BootThumbs', array(
-    'dataProvider'=>$oUserList,
-    'template'=>'{items}<tr><td colspan="10">{pager}</td></tr>',
-    'itemView'=>'_item',
-    // Remove the existing tooltips and rebind the plugin after each ajax-call.
-    'afterAjaxUpdate'=>"js:function() {
-        jQuery('.tooltip').remove();
-        jQuery('a[rel=tooltip]').tooltip();
-    }",
-)); 
-*/
-?>
 </table>
 
 <br />
