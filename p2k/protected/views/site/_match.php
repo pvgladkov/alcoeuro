@@ -11,7 +11,7 @@ if( !Yii::app()->user->isGuest ){
 	$aMyMatchesIds = array_keys( $aMyMatches );
 }
 
-if( in_array( $data->id, $aMyMatchesIds ) &&  !$aMyMatches[$data->id]->is_done ){
+if( in_array( $data->id, $aMyMatchesIds ) ){
 	$sClass = 'bred';
 } else {
 	$sClass = 'bgreen';
