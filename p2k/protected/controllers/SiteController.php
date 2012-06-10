@@ -101,9 +101,35 @@ class SiteController extends Controller
 			}
 		}
 		
+		$aSt = array();
+		
+		foreach( $aStat as $key=>$val ){
+			$aSt[] = array(
+				'id' => $key,
+				'score' => $val
+			);
+		}
+		
+		for( $i=0; $i< 4; $i++){
+			for( $j=$i; $j< 4; $j++){
+				if( $aSt[$j]['score'] > $aSt[$i]['score'] ){
+					// меняем
+					$aTmp['id'] = $aSt[$j]['id'];
+					$aTmp['score'] = $aSt[$j]['score'];
+					$aSt[$j]['id'] = $aSt[$i]['id'];
+					$aSt[$j]['score'] = $aSt[$i]['score'];
+					$aSt[$i]['id'] = $aTmp['id'];
+					$aSt[$i]['score'] = $aTmp['score'];
+				}
+			}
+		}
+		
+		//var_dump($aSt);
+		//die();
 		
 		$this->render('table', array(
-			'aStat' => $aStat
+			'aStat' => $aStat,
+			'aSt' => $aSt
 		));
 	}
 

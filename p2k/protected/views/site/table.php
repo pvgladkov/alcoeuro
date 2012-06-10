@@ -10,21 +10,12 @@
 		<th>Имя</th>
 		<th>Литры</th>
 	</tr>
-	<tr>
-		<th>Дима</th>
-		<th><?= $aStat[1]?></th>
-	<tr>
-		<th>Павел</th>
-		<th><?= $aStat[2]?></th>
-	</tr>
-	<tr>
-		<th>Матвей</th>
-		<th><?= $aStat[3]?></th>
-	</tr>
-	<tr>
-		<th>Жора</th>
-		<th><?= $aStat[4]?></th>
-	</tr>
+	<?php foreach( $aSt as $st ) {?>
+		<tr>
+			<th><?php echo UserIdentity::getUserName($st['id'])?></th>
+			<th><?= $st['score']?></th>
+		<tr>
+	<?php }?>
 
 <?php 
 /*
