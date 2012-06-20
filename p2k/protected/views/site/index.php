@@ -25,6 +25,24 @@
 
 		?>
 		</table>
+		<h2>Плэй-офф</h2>
+		<table class="table table-bordered" >
+
+		<?php 
+
+		$this->widget('bootstrap.widgets.BootThumbs', array(
+			'dataProvider'=>$oMatchPOList,
+			'template'=>'{items}<tr><td colspan="10">{pager}</td></tr>',
+			'itemView'=>'_match',
+			// Remove the existing tooltips and rebind the plugin after each ajax-call.
+			'afterAjaxUpdate'=>"js:function() {
+				jQuery('.tooltip').remove();
+				jQuery('a[rel=tooltip]').tooltip();
+			}",
+		)); 
+
+		?>
+		</table>
 		</td>
 		<td width="25%"> 
 	

@@ -48,15 +48,33 @@ class SiteController extends Controller
 				'pagination' => array(
 					'pageSize' => 30,
 				),
+				'criteria'=>array(
+					'condition'=>'id<25',
+				)
 			)
 		);
+		
+		// матчи ПО
+		$oMatchPOList = new CActiveDataProvider(
+			'Match',
+			array(
+				'pagination' => array(
+					'pageSize' => 30,
+				),
+				'criteria'=>array(
+					'condition'=>'id>24',
+				)
+			)
+		);
+		
 		
 		$sSt = UserMatch::getStat();
 		
 		$this->render('index', array(
 			'sUserName' => $sUserName,
 			'oMatchList'	=> $oMatchList,
-			'aSt'			=> $sSt
+			'aSt'			=> $sSt,
+			'oMatchPOList'	=> $oMatchPOList
 		));
 	}
 
