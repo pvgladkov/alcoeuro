@@ -1,0 +1,42 @@
+server {
+
+        listen   80; ## listen for ipv4
+        #listen   [::]:80 default ipv6only=on; ## listen for ipv6
+
+        server_name  p2k.loc;
+
+        access_log  /var/log/nginx/localhost.access.log;
+
+        root   /home/pavel/repos/yii/p2k;
+        index  index.html index.htm index.php;
+
+
+        location / {
+                root /home/pavel/repos/yii/p2k;
+                index index.php;
+                try_files $uri $uri/ /index.php?$args;
+
+        }
+
+		location ~ \.php$ {
+                root /home/pavel/repos/yii/p2k;
+                fastcgi_intercept_errors on;
+                fastcgi_pass 127.0.0.1:9000;
+                fastcgi_index index.php;
+                fastcgi_param SCRIPT_FILENAME /home/pavel/repos/yii/p2k$fastcgi_script_name;
+                include fastcgi_params;
+                set $path_info $request_uri;
+                if ($request_uri ~ "^(.*)(\?.*)$") {
+                        set $path_info $1;
+                }
+                fastcgi_param PATH_INFO $path_info;
+        }
+
+
+		location ~* ^.+.(jpg|jpeg|gif|css|png|ico|js|html)$ {
+                root   /home/pavel/repos/yii/p2k;
+                access_log off;
+                expires 30d;
+        }
+
+}
