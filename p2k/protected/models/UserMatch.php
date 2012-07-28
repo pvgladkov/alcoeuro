@@ -4,7 +4,11 @@
  * This is the model class for table "matches".
  *
  * The followings are the available columns in table 'user_matches':
- * @property date $day
+ * @property integer $id
+ * @property integer $match_id
+ * @property date $create_time
+ * @property integer $user_id
+ * @property ineger $bet
  */
 class UserMatch extends CActiveRecord
 {
@@ -56,10 +60,11 @@ class UserMatch extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'id',
-			'user_id' => 'user_id',
-			'bet'	=> 'bet',
-			'is_done' => 'is_done'
+			'id'		=> 'id',
+			'match_id'		=> 'match id',
+			'create_time'		=> 'create_time',
+			'user_id'	=> 'user_id',
+			'bet'		=> 'bet',
 		);
 	}
 
@@ -75,9 +80,10 @@ class UserMatch extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id,true);
+		$criteria->compare('match_id',$this->match_id,true);
+		$criteria->compare('create_time',$this->create_time,true);
 		$criteria->compare('user_id',$this->user_id,true);
 		$criteria->compare('bet',$this->bet,true);
-		$criteria->compare('is_done',$this->is_done,true);
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria'=>$criteria,
 		));
@@ -92,7 +98,7 @@ class UserMatch extends CActiveRecord
 		$oMatch = Match::model()->findByPk( $this->match_id );
 		
 		// матч начался, а ставка не сделана
-		if( strtotime($oMatch->date) < date(mktime()) && !$this->is_done ){
+		if( strtotime( $oMatch->date ) < date(mktime()) && !$this->is_done ){
 			return 'no';
 		}
 		
@@ -111,58 +117,22 @@ class UserMatch extends CActiveRecord
 		return 'no';
 	}
 	
-	public static function getStat(){
+	/**
+	 * Получить пользовательские ставки
+	 * @param integer $iUserId
+	 * @return array
+	 */
+	public static function getUserMatches( $iUserId ){
 		
-		$aStat = array(
-			1 => 0,
-			2 => 0,
-			3 => 0,
-			4 => 0,
-		);	
+		$aMatches = UserMatch::model()->findAllByAttributes(
+			array( 'user_id' => $iUserId ),
+			array( 'index'	=> 'match_id' )
+		);
 		
-		$aUserMatches = UserMatch::model()->findAll();
-		
-		foreach( $aUserMatches as $oUserMatch){
-			if( $oUserMatch->checkMatch() == 'yes' ){
-				$aStat[ $oUserMatch->user_id ]++;
-			}
-			
-			if( $oUserMatch->checkMatch() == 'no' ){
-				for( $i = 1; $i < 5; $i++ ){
-					if( $i == $oUserMatch->user_id ){
-						continue;
-					}
-					$aStat[ $i ]++;
-				}
-				
-			}
-		}
-		
-		$aSt = array();
-		
-		foreach( $aStat as $key=>$val ){
-			$aSt[] = array(
-				'id' => $key,
-				'score' => $val
-			);
-		}
-		
-		for( $i=0; $i< 4; $i++){
-			for( $j=$i; $j< 4; $j++){
-				if( $aSt[$j]['score'] > $aSt[$i]['score'] ){
-					// меняем
-					$aTmp['id'] = $aSt[$j]['id'];
-					$aTmp['score'] = $aSt[$j]['score'];
-					$aSt[$j]['id'] = $aSt[$i]['id'];
-					$aSt[$j]['score'] = $aSt[$i]['score'];
-					$aSt[$i]['id'] = $aTmp['id'];
-					$aSt[$i]['score'] = $aTmp['score'];
-				}
-			}
-		}
-		
-		return $aSt;
+		return $aMatches;
 	}
+	
+	
 	
 }
 

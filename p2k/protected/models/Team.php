@@ -1,25 +1,15 @@
 <?php
 
 /**
- * This is the model class for table "users".
+ * This is the model class for table "teams".
  *
  * The followings are the available columns in table 'users':
- * @property ineger $id
- * @property date $create_time
- * @property string $nickname
- * @property string $email
+ * @property inetger $id
  * @property string $name
- * @property string $password
+ * @property string $logo
  */
-class User extends CActiveRecord
+class Team extends CActiveRecord
 {
-	
-	/**
-	 * Соль для пароля
-	 * @var string
-	 */
-	private static $_salt = 'XFy.^%\!fsbdhf4%*@dd';
-	
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return Metro the static model class
@@ -34,7 +24,7 @@ class User extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'users';
+		return 'teams';
 	}
 
 	/**
@@ -60,7 +50,6 @@ class User extends CActiveRecord
 		);
 	}
 
-
 	/**
 	 * @return array customized attribute labels (name=>label)
 	 */
@@ -68,10 +57,8 @@ class User extends CActiveRecord
 	{
 		return array(
 			'id'	=> 'id',
-			'create_time'	=> 'create_time',
-			'nickname' => 'nickname',
-			'email'		=> 'email',
-			'name'		=> 'name',
+			'name'	=> 'name',
+			'logo' => 'logo',
 		);
 	}
 
@@ -87,58 +74,14 @@ class User extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id,true);
-		$criteria->compare('create_time',$this->create_time,true);
-		$criteria->compare('nickname',$this->nickname,true);
-		$criteria->compare('email',$this->email,true);
 		$criteria->compare('name',$this->name,true);
+		$criteria->compare('logo',$this->logo,true);
 
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria'=>$criteria,
 		));
 	}
-	
-	/**
-	* запись нового пароля
-	* 
-	* @param mixed $sNotCryptPassword
-	*/
-	public function savePassword( $sNotCryptPassword ){
-		
-		$sPassword = $this->encrypt( $sNotCryptPassword );
-		$sql = "UPDATE `users` SET `password` = '" . $sPassword . "' WHERE `id` = " . $this->id;
-		Yii::app()->db->createCommand($sql)->execute();
-		
-	}
-	
-	/**
-	 * Хэширование пароля с солью
-	 * @param string $value
-	 * @return string
-	 */
-	public function encrypt( $sValue ){
-		return md5( self::$_salt . $sValue . md5( self::$_salt ) );
-	}
-	
-	
-	/**
-	 * Именованная группа условия (scopes) c параметром для email
-	 * @param string $sEmail
-	 * @return User
-	 */
-	public function scopeEmail( $sEmail ){
-			
-		$this->getDbCriteria()->mergeWith(array(
-			'condition' => "`email` = '$sEmail'",
-		));
-			
-		
-		return $this;
-	}
-	
-	public function scopeNotDeleted() {
 
-		return $this;
-	}	
 }
 
 ?>

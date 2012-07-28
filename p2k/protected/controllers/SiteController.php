@@ -67,13 +67,10 @@ class SiteController extends Controller
 			)
 		);
 		
-		
-		$sSt = UserMatch::getStat();
-		
 		$this->render('index', array(
 			'sUserName' => $sUserName,
 			'oMatchList'	=> $oMatchList,
-			'aSt'			=> $sSt,
+			'aSt'			=> array(),
 			'oMatchPOList'	=> $oMatchPOList
 		));
 	}
@@ -93,21 +90,15 @@ class SiteController extends Controller
 	}
 	
 	/**
-	 * Таблица
+	 * Таблица статистики
 	 */
 	public function actionTable(){
-		
-		$aSt = UserMatch::getStat();
-		
-		//var_dump($aSt);
-		//die();
-		
-		$this->render('table', array(
-			//'aStat' => $aStat,
-			'aSt' => $aSt
-		));
-	}
 
+		$this->render(
+			'table', 
+			array()
+		);
+	}
 		
 	/**
 	 * Верхняя менюшка
@@ -115,7 +106,6 @@ class SiteController extends Controller
 	 * @return array 
 	 */
 	public function getMenu(){
-		
 		
 		foreach( $this->aUrls as $key => $aItem ) {
 			if( $aItem['url'] == '/'.Yii::app()->request->getPathInfo()  ) {
@@ -151,13 +141,17 @@ class SiteController extends Controller
 		
 		return $aMenu;
 	}
-
+	
 	/**
 	 * Displays the login page
 	 */
 	public function actionLogin() {
 		
-		$model=new LoginForm;
+		if( !Yii::app()->user->isGuest ){
+			$this->redirect('/');
+		}
+		
+		$model = new LoginForm;
 
 		// if it is ajax validation request
 		if(isset($_POST['ajax']) && $_POST['ajax']==='login-form') {
@@ -173,20 +167,21 @@ class SiteController extends Controller
 				$this->redirect('/');
 		}
 		// display the login form
-		$this->render('login',array('model'=>$model));
+		$this->render( 'login', array( 'model' =>$model ) );
 	}
 
 	/**
-	 * Logs out the current user and redirect to homepage.
+	 * Разлогирование
 	 */
 	public function actionLogout() {
+		
 		Yii::app()->user->logout();
 		
 		$this->redirect('/');
 	}
 	
 	/**
-	 * аяксовая голосовалка
+	 * Аяксовая голосовалка
 	 */
 	public function actionBet(){
 		

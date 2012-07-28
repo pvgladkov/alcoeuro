@@ -4,7 +4,14 @@
  * This is the model class for table "matches".
  *
  * The followings are the available columns in table 'users':
- * @property date $day
+ * @property inetger $id
+ * @property date $date
+ * @property integer $competition_id
+ * @property integer $home_id
+ * @property integer $away_id
+ * @property integer $home_score
+ * @property itneger $away_score
+ * @property boolean $get_reslt
  */
 class Match extends CActiveRecord
 {
@@ -56,8 +63,14 @@ class Match extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'name' => 'Name',
-
+			'id'	=> 'id',
+			'date'	=> 'date',
+			'competition_id' => 'competition_id',
+			'home_id'	=> 'home_id',
+			'away_id'	=> 'away_id',
+			'home_score'	=> 'home_score',
+			'away_score'	=> 'away_score',
+			'get_result'	=> 'get_result'
 		);
 	}
 
@@ -72,7 +85,14 @@ class Match extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('name',$this->name,true);
+		$criteria->compare('id',$this->id,true);
+		$criteria->compare('date',$this->date,true);
+		$criteria->compare('competition_id',$this->competition_id,true);
+		$criteria->compare('home_id',$this->home_id,true);
+		$criteria->compare('away_id',$this->away_id,true);
+		$criteria->compare('home_score',$this->home_score,true);
+		$criteria->compare('away_score',$this->away_score,true);
+		$criteria->compare('get_result',$this->get_result,true);
 
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria'=>$criteria,

@@ -111,6 +111,7 @@ return array(
 				),
 			),
 		),
+
 	),
 
 	// application-level parameters that can be accessed
