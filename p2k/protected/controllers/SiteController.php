@@ -185,22 +185,35 @@ class SiteController extends Controller
 	 */
 	public function actionBet(){
 		
+		if( !Yii::app()->request->isAjaxRequest ){
+			Yii::app()->end();
+		}
+		
 		if( !Yii::app()->user->isGuest ){
 			
-			$iMatchId = Yii::app()->request->getParam('match_id');
-			$bBet = Yii::app()->request->getParam('bet');
+			$iMatchId = Yii::app()->request->getParam( 'match_id', 0 );
+			$bBet = Yii::app()->request->getParam( 'bet', 0 );
 		
 			$iUserId = Yii::app()->user->getId();
 		
 			$oMatch = Match::model()->findByPk( $iMatchId );
 			// время не ислекло
-			if(strtotime( $oMatch->date ) >= date(mktime()) ){
-				// проставить
-				$oUSerMatch = UserMatch::model()->findByAttributes(array( 'match_id' => $iMatchId ));
-				if( $oUSerMatch ){
-					$oUSerMatch->bet = $bBet;
-					$oUSerMatch->save();
+			if( strtotime( $oMatch->date ) >= date(mktime()) ){
+				
+				$oUSerMatch = UserMatch::model()->findByAttributes( 
+					array(
+						'match_id'	=> $iMatchId,
+						'user_id'	=> $iUserId
+					)
+				);
+				if( !$oUSerMatch ){
+					$oUSerMatch = new UserMatch();
+					$oUSerMatch->match_id = $iMatchId;
+					$oUSerMatch->user_id = $iUserId;
 				}
+				$oUSerMatch->bet = $bBet;
+				$oUSerMatch->save();
+				
 				echo '<span class="label label-info">'.Yii::app()->user->getName().'</span>';
 			}
 		}

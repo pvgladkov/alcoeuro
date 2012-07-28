@@ -1,49 +1,38 @@
 <?php
-$aMyMatches = array();
-$aMyMatchesIds = array();
-if( !Yii::app()->user->isGuest ){
-	$iUserId = UserIdentity::getUserId( Yii::app()->user->name );
-	// получим мои матчи
-	$aMyMatches = UserMatch::model()->findAllByAttributes(
-		array( 'user_id' => $iUserId ),
-		array( 'index'	=> 'match_id' )
-	);
-	$aMyMatchesIds = array_keys( $aMyMatches );
-}
 
-if( in_array( $data->id, $aMyMatchesIds ) ){
-	$sClass = 'alert alert-error';
-} else {
-	$sClass = 'alert alert-success';
+$oUserMatch = null;
+
+if( !Yii::app()->user->isGuest ){
+
+	$oUserMatch = UserMatch::model()->findByAttributes(
+		array(
+			'match_id'	=> $data->id,
+			'user_id'	=> Yii::app()->user->getId()
+		)
+	);
 }
 
 $sLabelClass = 'label-info';
-
 
 $aBet = array(
 	0 => '',
 	1 => ''
 );
 
-$oUserMatch = UserMatch::model()->findByAttributes(array('match_id' => $data->id));
-
 if( $oUserMatch ){
-	if( $oUserMatch->is_done ){
-		
-		$aBet[ $oUserMatch->bet ] = UserIdentity::getUserName( $oUserMatch->user_id);
-		$oMatch = Match::model()->findByPk( $data->id );
-		if(strtotime($oMatch->date)+90*60 < date(mktime()) ){
-			if( $oUserMatch->checkMatch() == 'yes' ){
-				$sLabelClass = 'label-success';
-			} 
-			elseif( $oUserMatch->checkMatch() == 'draw' ) {
-				$sLabelClass = 'label-warning';
-			} else {
-				$sLabelClass = 'label-important';
-			}
+	
+	$aBet[ $oUserMatch->bet ] = Yii::app()->user->getName();
+	$oMatch = Match::model()->findByPk( $data->id );
+	if(strtotime( $oMatch->date )+90*60 < date( mktime() ) ){
+		if( $oUserMatch->checkMatch() == 'yes' ){
+			$sLabelClass = 'label-success';
+		} 
+		elseif( $oUserMatch->checkMatch() == 'draw' ) {
+			$sLabelClass = 'label-warning';
+		} else {
+			$sLabelClass = 'label-important';
 		}
 	}
-	
 }
 
 if( !$data->get_result ){
@@ -57,7 +46,7 @@ if( !$data->get_result ){
 ?>
 
 
-<tr class="<?= $sClass?>" style="color:black">
+<tr class="alert alert-success" style="color:black">
 
 	<td class="ar match-id"><?php echo $data->id ?></td>
 	<td class="ar "><?php echo TransDataComponent::getHumanDateTime($data->date) ?></td>
