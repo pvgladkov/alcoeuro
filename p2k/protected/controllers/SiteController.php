@@ -190,30 +190,19 @@ class SiteController extends Controller
 			$iMatchId = Yii::app()->request->getParam('match_id');
 			$bBet = Yii::app()->request->getParam('bet');
 		
-			$iUserId = UserIdentity::getUserId( Yii::app()->user->name );
+			$iUserId = Yii::app()->user->getId();
 		
-			$aMyMatches = UserMatch::model()->findAllByAttributes(
-				array( 'user_id' => $iUserId ),
-				array( 'index'	=> 'match_id' )
-			);
-			$aMyMatchesIds = array_keys( $aMyMatches );
-			
-			if( in_array( $iMatchId, $aMyMatchesIds ) ){
-				
-				$oMatch = Match::model()->findByPk( $iMatchId );
-				// время не ислекло
-				if(strtotime($oMatch->date) >= date(mktime()) ){
-					// проставить
-					$oUSerMatch = UserMatch::model()->findByAttributes(array( 'match_id' => $iMatchId ));
+			$oMatch = Match::model()->findByPk( $iMatchId );
+			// время не ислекло
+			if(strtotime( $oMatch->date ) >= date(mktime()) ){
+				// проставить
+				$oUSerMatch = UserMatch::model()->findByAttributes(array( 'match_id' => $iMatchId ));
+				if( $oUSerMatch ){
 					$oUSerMatch->bet = $bBet;
-					$oUSerMatch->is_done = 1;
 					$oUSerMatch->save();
-
-					echo '<span class="label label-info">'.UserIdentity::getUserName($iUserId).'</span>';
 				}
-				
+				echo '<span class="label label-info">'.Yii::app()->user->getName().'</span>';
 			}
-
 		}
 		
 		echo '';

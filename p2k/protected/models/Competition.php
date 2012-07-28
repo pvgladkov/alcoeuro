@@ -13,6 +13,9 @@
  */
 class Competition extends CActiveRecord
 {
+	
+	const CTYPE_CL = 1;
+	
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return Metro the static model class
@@ -53,7 +56,6 @@ class Competition extends CActiveRecord
 		);
 	}
 
-
 	/**
 	 * @return array customized attribute labels (name=>label)
 	 */
@@ -72,8 +74,7 @@ class Competition extends CActiveRecord
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
 	 */
-	public function search()
-	{
+	public function search(){
 		// Warning: Please modify the following code to remove attributes that
 		// should not be searched.
 

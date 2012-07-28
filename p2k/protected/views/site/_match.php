@@ -72,7 +72,7 @@ if( !$data->get_result ){
 			<?php } ?>
 			</span>&nbsp;
 			
-		<?php echo $data->home ?>&nbsp;<img height="15" width="22"  src="/images/flags/<?php echo $data->home ?>.png" />&nbsp;
+		<?php echo $data->home_id ?>&nbsp;<img height="15" width="22"  src="/images/flags/<?php echo $data->home_id ?>.png" />&nbsp;
 		<span style="font-weight: bold;"><?=$sHomeScore?></span>
 	</td>
 	
@@ -80,7 +80,7 @@ if( !$data->get_result ){
 		
 		<span style="font-weight: bold;"><?=$sAwayScore?></span>
 		
-		&nbsp<img height="15" width="22"  src="/images/flags/<?php echo $data->away ?>.png" />&nbsp;<?php echo $data->away ?>
+		&nbsp<img height="15" width="22"  src="/images/flags/<?php echo $data->away_id ?>.png" />&nbsp;<?php echo $data->away_id ?>
 		<span class="away" id="<?php echo $data->id.'-away' ?>" >
 		
 		<?php if( $aBet[1] ){ ?>
