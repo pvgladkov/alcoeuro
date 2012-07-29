@@ -5,8 +5,7 @@ class SiteController extends Controller
 	private $aUrls = array(
 		//array('label'=>'Home', 'url'=>'/', 'active'=>false),
 		array('label'=>'Алкорейтинг', 'url'=>'/site/table', 'active'=>false),
-		array('label'=>'О нас', 'url'=>'/site/about', 'active'=>false),
-		
+		array('label'=>'О нас', 'url'=>'/site/about', 'active'=>false),	
 	);
 	
 	/**
@@ -33,45 +32,18 @@ class SiteController extends Controller
 	 */
 	public function actionIndex(){
 		
-
-		if( Yii::app()->user->isGuest ){
-			$sUserName = '%Username%';
-		} else {
-			$sUserName = Yii::app()->user->name;
-			$iUserId = UserIdentity::getUserId( $sUserName );
-
-		}
-
 		$oMatchList = new CActiveDataProvider(
 			'Match',
 			array(
 				'pagination' => array(
 					'pageSize' => 30,
-				),
-				'criteria'=>array(
-					'condition'=>'id<25',
-				)
-			)
-		);
-		
-		// матчи ПО
-		$oMatchPOList = new CActiveDataProvider(
-			'Match',
-			array(
-				'pagination' => array(
-					'pageSize' => 30,
-				),
-				'criteria'=>array(
-					'condition'=>'id>24',
 				)
 			)
 		);
 		
 		$this->render('index', array(
-			'sUserName' => $sUserName,
 			'oMatchList'	=> $oMatchList,
 			'aSt'			=> array(),
-			'oMatchPOList'	=> $oMatchPOList
 		));
 	}
 
@@ -79,12 +51,6 @@ class SiteController extends Controller
 	 * Страница about
 	 */
 	public function actionAbout(){
-		
-		$oUser = new User();
-		$oUser->setAttributes(array(
-			'name' => 'Pavel'
-		));
-		//$oUser->save();
 		
 		$this->render('about');
 	}
@@ -94,10 +60,7 @@ class SiteController extends Controller
 	 */
 	public function actionTable(){
 
-		$this->render(
-			'table', 
-			array()
-		);
+		$this->render( 'table', array() );
 	}
 		
 	/**
@@ -154,20 +117,20 @@ class SiteController extends Controller
 		$model = new LoginForm;
 
 		// if it is ajax validation request
-		if(isset($_POST['ajax']) && $_POST['ajax']==='login-form') {
-			echo CActiveForm::validate($model);
+		if( isset($_POST['ajax'] ) && $_POST['ajax']==='login-form') {
+			echo CActiveForm::validate( $model );
 			Yii::app()->end();
 		}
 
 		// collect user input data
-		if(isset($_POST['LoginForm'])) {
-			$model->attributes=$_POST['LoginForm'];
+		if( isset( $_POST['LoginForm'] ) ) {
+			$model->attributes = $_POST['LoginForm'];
 			// validate user input and redirect to the previous page if valid
-			if($model->validate() && $model->login())
+			if( $model->validate() && $model->login() )
 				$this->redirect('/');
 		}
 		// display the login form
-		$this->render( 'login', array( 'model' =>$model ) );
+		$this->render( 'login', array( 'model' => $model ) );
 	}
 
 	/**
@@ -178,6 +141,46 @@ class SiteController extends Controller
 		Yii::app()->user->logout();
 		
 		$this->redirect('/');
+	}
+	
+	/**
+	 * Регистрация
+	 */
+	public function actionRegister(){
+		
+        $form = new User();
+
+        if (!Yii::app()->user->isGuest) {
+			$this->redirect('/');
+        } else {
+
+            if( !empty( $_POST['User'] ) ) {
+                
+                //$form->attributes = $_POST['User'];
+				$form->email = $_POST['User']['email'];
+				$form->password = $_POST['User']['password'];
+				
+				if( $form->validate( 'register' ) ) {
+
+					if( $form->model()->count("email = :email", array(':email' => $form->email))) {
+
+						$form->addError( 'email', 'Логин уже занят' );
+						$this->render( "register", array( 'form' => $form ) );
+					} else {
+						// Выводим страницу что "все окей"
+						$form->save();
+						$this->redirect( '/' );
+					}
+                                             
+				} else {
+
+					$this->render( "register", array( 'form' => $form ) );
+				}
+			} else {
+
+				$this->render("register", array('form' => $form));
+			}
+		}
 	}
 	
 	/**
@@ -197,7 +200,8 @@ class SiteController extends Controller
 			$iUserId = Yii::app()->user->getId();
 		
 			$oMatch = Match::model()->findByPk( $iMatchId );
-			// время не ислекло
+			
+			// время не истекло
 			if( strtotime( $oMatch->date ) >= date(mktime()) ){
 				
 				$oUSerMatch = UserMatch::model()->findByAttributes( 

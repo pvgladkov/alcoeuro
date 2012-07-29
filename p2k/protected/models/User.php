@@ -45,7 +45,7 @@ class User extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name', 'safe'),
+			array( 'email', 'safe' ),
 		);
 	}
 
@@ -60,6 +60,11 @@ class User extends CActiveRecord
 		);
 	}
 
+	public function beforeSave() {
+		
+		$this->password = $this->encrypt( $this->password );
+		return true;
+	}
 
 	/**
 	 * @return array customized attribute labels (name=>label)
@@ -69,7 +74,7 @@ class User extends CActiveRecord
 		return array(
 			'id'	=> 'id',
 			'create_time'	=> 'create_time',
-			'nickname' => 'nickname',
+			'nickname'		=> 'nickname',
 			'email'		=> 'email',
 			'name'		=> 'name',
 		);

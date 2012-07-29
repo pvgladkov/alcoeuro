@@ -88,18 +88,4 @@ class UserIdentity extends CUserIdentity{
 		
 	}
 	
-	public static function getUserId( $sName ){
-		if( $sName == 'dimon' ) return 1;
-		if( $sName == 'pavel' ) return 2;
-		if( $sName == 'matt' ) return 3;
-		if( $sName == 'goga' ) return 4;
-	}
-	
-	public static function getUserName( $iUserId ){
-		if( $iUserId == 1 ) return 'Дима';
-		if( $iUserId == 2 ) return 'Павел';
-		if( $iUserId == 3 ) return 'Матвей';
-		if( $iUserId == 4 ) return 'Гога';
-	}
-	
 }
