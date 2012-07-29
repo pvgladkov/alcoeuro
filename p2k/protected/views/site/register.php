@@ -1,35 +1,43 @@
 <h1>Регистрация</h1>
 
 
- <!-- То самое место где будут выводиться ошибки
-     если они будут при валидации !-->
-<?=CHtml::errorSummary( $form ); ?><br>
+
+<div class="form">
 
 <?php $_form=$this->beginWidget('CActiveForm', array(
-	'id'=>'login-form',
+	'id'=>'register-form',
 	'enableClientValidation'=>true,
 	'clientOptions'=>array(
 		'validateOnSubmit'=>true,
 	),
 )); ?>
+	
+	<div class="row">
+		 <!-- Выводим поле для логина !-->
+		<?=$_form->labelEx( $form, 'email' ); ?>
+		<?=$_form->textField( $form, 'email' ) ?>
+		<?=$_form->error( $form, 'email' ) ?>
+	</div>
+		 
+	<div class="row">
+		<!-- Выводим поле для пароля !-->
+		<?=$_form->labelEx( $form, 'password' ); ?>
+		<?=$_form->passwordField( $form, 'password' ) ?>
+		<?=$_form->error( $form, 'password' ) ?>
+	</div>
 
-    <table id="form2" border="0" width="400" cellpadding="10" cellspacing="10">
-         <tr>
-            <!-- Выводим поле для логина !-->
-            <td width="150"><?=$_form->labelEx( $form, 'email' ); ?></td>
-            <td><?=$_form->textField( $form, 'email' ) ?></td>
-         </tr>
-        <tr>
-            <!-- Выводим поле для пароля !-->
-            <td><?=$_form->labelEx( $form, 'password' ); ?></td>
-            <td><?=$_form->passwordField( $form, 'password' ) ?></td>
-         </tr>
-       
-        <tr>
-            <td></td>
-            <!-- Кнопка "регистрация" !-->
-             <td><?=CHtml::submitButton( 'Регистрация', array('id' => "submit") ); ?></td>
-        </tr>
-    </table>
+	<div class="row">
+		<!-- Еще раз пароль !-->
+		<?=$_form->labelEx( $form, 'password2' ); ?>
+		<?=$_form->passwordField( $form, 'password2' ) ?>
+		<?=$_form->error( $form, 'password2' ) ?>
+	</div>
+
+	<div class="row buttons">
+		<!-- Кнопка "регистрация" !-->
+		<?=CHtml::submitButton( 'Регистрация', array('id' => "submit") ); ?>
+	</div>
+
 
 <?php $this->endWidget(); ?>
+</div>

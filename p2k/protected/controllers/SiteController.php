@@ -117,7 +117,7 @@ class SiteController extends Controller
 		$model = new LoginForm;
 
 		// if it is ajax validation request
-		if( isset($_POST['ajax'] ) && $_POST['ajax']==='login-form') {
+		if( isset($_POST['ajax'] ) && $_POST['ajax'] === 'login-form') {
 			echo CActiveForm::validate( $model );
 			Yii::app()->end();
 		}
@@ -148,37 +148,38 @@ class SiteController extends Controller
 	 */
 	public function actionRegister(){
 		
-        $form = new User();
+        $form = new RegisterForm();
 
         if (!Yii::app()->user->isGuest) {
 			$this->redirect('/');
         } else {
-
-            if( !empty( $_POST['User'] ) ) {
+			
+			if( isset($_POST['ajax'] ) && $_POST['ajax'] === 'register-form') {
+				echo CActiveForm::validate( $form );
+				Yii::app()->end();
+			}
+			
+            if( !empty( $_POST['RegisterForm'] ) ) {
                 
                 //$form->attributes = $_POST['User'];
-				$form->email = $_POST['User']['email'];
-				$form->password = $_POST['User']['password'];
+				$form->email = $_POST['RegisterForm']['email'];
+				$form->password = $_POST['RegisterForm']['password'];
+				$form->password2 = $_POST['RegisterForm']['password2'];
 				
 				if( $form->validate( 'register' ) ) {
 
-					if( $form->model()->count("email = :email", array(':email' => $form->email))) {
-
-						$form->addError( 'email', 'Логин уже занят' );
-						$this->render( "register", array( 'form' => $form ) );
-					} else {
-						// Выводим страницу что "все окей"
-						$form->save();
-						$this->redirect( '/' );
-					}
-                                             
+					// Выводим страницу что "все окей"
+					$oUser = new User();
+					$oUser->attributes = $form->attributes;
+					$oUser->save();
+					$this->redirect( '/' );                     
 				} else {
 
 					$this->render( "register", array( 'form' => $form ) );
 				}
 			} else {
 
-				$this->render("register", array('form' => $form));
+				$this->render("register", array( 'form' => $form ) );
 			}
 		}
 	}

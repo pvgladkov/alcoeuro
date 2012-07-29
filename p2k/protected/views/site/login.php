@@ -16,9 +16,9 @@ $this->breadcrumbs=array(
 )); ?>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'username'); ?>
-		<?php echo $form->textField($model,'username'); ?>
-		<?php echo $form->error($model,'username'); ?>
+		<?php echo $form->labelEx( $model,'username' ); ?>
+		<?php echo $form->textField( $model,'username' ); ?>
+		<?php echo $form->error( $model,'username' ); ?>
 	</div>
 
 	<div class="row">
@@ -28,14 +28,9 @@ $this->breadcrumbs=array(
 
 	</div>
 
-	<div class="row rememberMe">
-		<?php echo $form->checkBox($model,'rememberMe'); ?>
-		<?php echo $form->label($model,'rememberMe'); ?>
-		<?php echo $form->error($model,'rememberMe'); ?>
-	</div>
-
 	<div class="row buttons">
 		<?php echo CHtml::submitButton('Login'); ?>
+		<?php echo CHtml::link('Регистрация', '/site/register')?>
 	</div>
 
 <?php $this->endWidget(); ?>
