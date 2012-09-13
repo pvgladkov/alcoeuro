@@ -7,6 +7,7 @@
  * @property inetger $id
  * @property string $name
  * @property string $logo
+ * @property string $small_log 
  */
 class Team extends CActiveRecord
 {
@@ -76,6 +77,7 @@ class Team extends CActiveRecord
 		$criteria->compare('id',$this->id,true);
 		$criteria->compare('name',$this->name,true);
 		$criteria->compare('logo',$this->logo,true);
+		$criteria->compare('small_logo',$this->small_logo,true);
 
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria'=>$criteria,

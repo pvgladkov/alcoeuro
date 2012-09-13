@@ -43,25 +43,27 @@ if( !$data->get_result ){
 	$sAwayScore = ' '.$data->away_score.' ';
 }
 
+$oHome = Team::model()->findByPk($data->home_id);
+$oAway = Team::model()->findByPk($data->away_id);
 ?>
 
 
 <tr class="alert alert-success" style="color:black">
 
-	<td class="ar match-id"><?php echo $data->id ?></td>
-	<td class="ar "><?php echo TransDataComponent::getHumanDateTime($data->date) ?></td>
+	<td class="ar match-id"><?=$data->id ?></td>
+	<td class="ar "><?= TransDataComponent::getHumanDateTime($data->date) ?></td>
 	
 	<td class="ar bet" data="0" style="text-align:right;">
 			
-			<span class="home" id="<?php echo $data->id.'-home' ?>">
+			<span class="home" id="<?= $data->id.'-home' ?>">
 			<?php if( $aBet[0] ){ ?>
 				<span class="label <?=$sLabelClass?>">
-					<?php echo $aBet[0].' '?>
+					<?= $aBet[0].' '?>
 				</span>	
 			<?php } ?>
 			</span>&nbsp;
 			
-		<?php echo $data->home_id ?>&nbsp;<img height="15" width="22"  src="/images/flags/<?php echo $data->home_id ?>.png" />&nbsp;
+		<?=$oHome->name ?>&nbsp;<img height="15" width="22"  src="/images/club_logos/<?=$oHome->small_logo ?>" />&nbsp;
 		<span style="font-weight: bold;"><?=$sHomeScore?></span>
 	</td>
 	
@@ -69,12 +71,12 @@ if( !$data->get_result ){
 		
 		<span style="font-weight: bold;"><?=$sAwayScore?></span>
 		
-		&nbsp<img height="15" width="22"  src="/images/flags/<?php echo $data->away_id ?>.png" />&nbsp;<?php echo $data->away_id ?>
-		<span class="away" id="<?php echo $data->id.'-away' ?>" >
+		&nbsp<img height="15" width="22"  src="/images/club_logos/<?=$oAway->small_logo ?>" />&nbsp;<?=$oAway->name ?>
+		<span class="away" id="<?=$data->id.'-away' ?>" >
 		
 		<?php if( $aBet[1] ){ ?>
 			<span class="label <?=$sLabelClass?>">
-				<?php echo $aBet[1].' '?>
+				<?=$aBet[1].' '?>
 			</span>	
 		<?php } ?>
 		</span>&nbsp;

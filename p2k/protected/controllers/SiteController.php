@@ -27,10 +27,21 @@ class SiteController extends Controller
 	}
 
 	/**
+	 * 
+	 */
+	public function actionHello(){
+		$this->render('hello');
+	}
+	
+	/**
 	 * Основной индекс
 	 * 
 	 */
 	public function actionIndex(){
+		
+		if( Yii::app()->user->isGuest ){
+			$this->redirect('/site/hello');
+		}
 		
 		$oMatchList = new CActiveDataProvider(
 			'Match',

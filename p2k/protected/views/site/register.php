@@ -2,7 +2,7 @@
 
 
 
-<div class="form">
+<div class="form" style="text-align: center; padding-top: 70px" >
 
 <?php $_form=$this->beginWidget('CActiveForm', array(
 	'id'=>'register-form',
