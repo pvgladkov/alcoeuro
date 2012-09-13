@@ -1,13 +1,7 @@
 <?php
 
-class SiteController extends Controller
-{
-	private $aUrls = array(
-		//array('label'=>'Home', 'url'=>'/', 'active'=>false),
-		array('label'=>'Алкорейтинг', 'url'=>'/site/table', 'active'=>false),
-		array('label'=>'О нас', 'url'=>'/site/about', 'active'=>false),	
-	);
-	
+class SiteController extends Controller {
+		
 	/**
 	 * Declares class-based actions.
 	 */
@@ -43,19 +37,7 @@ class SiteController extends Controller
 			$this->redirect('/site/hello');
 		}
 		
-		$oMatchList = new CActiveDataProvider(
-			'Match',
-			array(
-				'pagination' => array(
-					'pageSize' => 30,
-				)
-			)
-		);
-		
-		$this->render('index', array(
-			'oMatchList'	=> $oMatchList,
-			'aSt'			=> array(),
-		));
+		$this->render('index');
 	}
 
 	/**
@@ -74,48 +56,6 @@ class SiteController extends Controller
 		$this->render( 'table', array() );
 	}
 		
-	/**
-	 * Верхняя менюшка
-	 * 
-	 * @return array 
-	 */
-	public function getMenu(){
-		
-		foreach( $this->aUrls as $key => $aItem ) {
-			if( $aItem['url'] == '/'.Yii::app()->request->getPathInfo()  ) {
-				$this->aUrls[$key]['active'] = true;
-			}
-		}
-		
-		$aMenu = array(
-			array(
-				'class'=>'bootstrap.widgets.BootMenu',
-				'items'=> $this->aUrls
-			),
-		);
-		
-		if( Yii::app()->user->isGuest ){
-			$aMenu[] = array(
-				'class'=>'bootstrap.widgets.BootMenu',
-				'htmlOptions'=>array('class'=>'pull-right'),
-				'items'=>array(
-					array('label'=>'Login', 'url'=>'/site/login'),
-				),
-			);
-
-		} else {
-			$aMenu[] = array(
-				'class'=>'bootstrap.widgets.BootMenu',
-				'htmlOptions'=>array('class'=>'pull-right'),
-				'items'=>array(
-					array('label'=>'Logout', 'url'=>'/site/logout'),
-				),
-			);
-		}
-		
-		return $aMenu;
-	}
-	
 	/**
 	 * Displays the login page
 	 */

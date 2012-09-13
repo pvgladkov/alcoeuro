@@ -20,4 +20,67 @@ class Controller extends CController
 	 * for more details on how to specify this property.
 	 */
 	public $breadcrumbs=array();
+	
+	/**
+	 * Верхняя менюшка
+	 * 
+	 * @return array 
+	 */
+	public function getMenu(){
+		
+		foreach( $this->aUrls as $key => $aItem ) {
+			if( $aItem['url'] == '/'.Yii::app()->request->getPathInfo()  ) {
+				$this->aUrls[$key]['active'] = true;
+			}
+		}
+		
+		$aMenu = array(
+			array(
+				'class'=>'bootstrap.widgets.BootMenu',
+				'items'=> $this->aUrls
+			),
+		);
+		
+		if( Yii::app()->user->isGuest ){
+			$aMenu[] = array(
+				'class'=>'bootstrap.widgets.BootMenu',
+				'htmlOptions'=>array('class'=>'pull-right'),
+				'items'=>array(
+					array('label'=>'Login', 'url'=>'/site/login'),
+				),
+			);
+
+		} else {
+			$aMenu[] = array(
+				'class'=>'bootstrap.widgets.BootMenu',
+				'htmlOptions'=>array('class'=>'pull-right'),
+				'items'=>array(
+					array('label'=>'Logout', 'url'=>'/site/logout'),
+				),
+			);
+		}
+		
+		return $aMenu;
+	}
+	
+	/**
+	 *
+	 * @var type 
+	 */
+	public $aUrls = array(
+		//array('label'=>'Home', 'url'=>'/', 'active'=>false),
+		array('label'=>'Алкорейтинг', 'url'=>'/site/table', 'active'=>false),
+		array('label'=>'О нас', 'url'=>'/site/about', 'active'=>false),	
+	);
+
+	/**
+	 * 
+	 * @param type $filterChain
+	 */
+	public function filterIsGuest( $filterChain ){
+		if( Yii::app()->user->isGuest ){
+			$this->redirect('/site/hello');
+		}
+		$filterChain->run();
+	}
 }
