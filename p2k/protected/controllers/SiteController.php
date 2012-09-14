@@ -37,7 +37,16 @@ class SiteController extends Controller {
 			$this->redirect('/site/hello');
 		}
 		
-		$this->render('index');
+		$oStat = new UserStat( User::model()->findByPk(Yii::app()->user->getId()) );
+		
+		$aStat = $oStat->getStat();
+		
+		$this->render(
+			'index',
+			array(
+				'aStat' => $aStat
+			)
+		);
 	}
 
 	/**
@@ -53,6 +62,10 @@ class SiteController extends Controller {
 	 */
 	public function actionTable(){
 
+		if( Yii::app()->user->isGuest ){
+			$this->redirect('/site/hello');
+		}
+		
 		$this->render( 'table', array() );
 	}
 		
