@@ -8,6 +8,7 @@
 class RegisterForm extends CFormModel {
 	
 	public $email;
+	public $nickname;
 	public $password;
 	public $password2;
 
@@ -22,6 +23,7 @@ class RegisterForm extends CFormModel {
 			array( 'email, password, password2', 'required' ),
 			array( 'password2', 'confirmPassword'),
 			array( 'email', 'unique'),
+			array( 'nickname', 'uniqueUsername'),
 		);
 	}
 
@@ -32,6 +34,7 @@ class RegisterForm extends CFormModel {
 		
 		return array(
 			'email'=>'Email',
+			'nickname' => 'Username',
 			'password' => 'Password',
 			'password2' => 'Password'
 		);
@@ -42,6 +45,14 @@ class RegisterForm extends CFormModel {
 		$oUser = User::model()->scopeEmail( $this->email )->findAll();
 		if( $oUser ){
 			$this->addError( 'email', 'email занят' );
+		}
+	}
+	
+	public function uniqueUsername(){
+		
+		$oUser = User::model()->scopeNickname( $this->nickname )->findAll();
+		if( $oUser ){
+			$this->addError( 'nickname', 'username занят' );
 		}
 	}
 	

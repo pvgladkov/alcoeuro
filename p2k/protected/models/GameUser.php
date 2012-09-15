@@ -1,21 +1,14 @@
 <?php
 
 /**
- * This is the model class for table "games".
+ * This is the model class for table "matches".
  *
- * The followings are the available columns in table 'users':
- * @property ineger $id
- * @property date $create_time
- * @property date $start_time
- * @property date $end_time
- * @property string $nickname
- * @property array $options
- * @property integer $owner_id
- * 
+ * The followings are the available columns in table 'game_users':
+ * @property integer $game_id
+ * @property integer $user_id
  */
-class Game extends CActiveRecord
+class GameUser extends CActiveRecord
 {
-
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return Metro the static model class
@@ -30,7 +23,7 @@ class Game extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'games';
+		return 'game_users';
 	}
 
 	/**
@@ -41,7 +34,7 @@ class Game extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('nickname, owner_id', 'safe'),
+			
 		);
 	}
 
@@ -56,18 +49,16 @@ class Game extends CActiveRecord
 		);
 	}
 
+	
+	
 	/**
 	 * @return array customized attribute labels (name=>label)
 	 */
 	public function attributeLabels()
 	{
 		return array(
-			'id'	=> 'id',
-			'create_time'	=> 'create_time',
-			'start_time'	=> 'start_time',
-			'end_time'	=> 'end_time',
-			'nickname' => 'nickname',
-			'options'	=> 'options',
+			'game_id'		=> 'game id',
+			'user_id'	=> 'user_id',
 		);
 	}
 
@@ -75,36 +66,33 @@ class Game extends CActiveRecord
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
 	 */
-	public function search(){
+	public function search()
+	{
 		// Warning: Please modify the following code to remove attributes that
 		// should not be searched.
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id,true);
-		$criteria->compare('create_time',$this->create_time,true);
-		$criteria->compare('start_time',$this->start_time,true);
-		$criteria->compare('end_time',$this->end_time,true);
-		$criteria->compare('nickname',$this->nickname,true);
-		$criteria->compare('options',$this->options,true);
-
+		$criteria->compare('game_id',$this->game_id,true);
+		$criteria->compare('user_id',$this->user_id,true);
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria'=>$criteria,
 		));
 	}
-	
-	/**
-	 * 
-	 * @param type $aUsers
-	 */
-	public function linkUsers( $aUsers ){
-		foreach($aUsers as $iUserId ){
-			$oGameUser = new GameUser();
-			$oGameUser->game_id = $this->id;
-			$oGameUser->user_id = $iUserId;
-			$oGameUser->save();
-		}
+
+	public static function getUserGames($iUserId){
+		$aGames = GameUser::model()->findAllByAttributes(
+			array(
+				'user_id' => $iUserId
+			),
+			array(
+				'index' => 'game_id'
+			)
+		);
+		$aGameIds = array_keys($aGames);
+		return $aGameIds;
 	}
+	
 }
 
 ?>

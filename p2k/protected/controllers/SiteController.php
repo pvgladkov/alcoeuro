@@ -37,14 +37,17 @@ class SiteController extends Controller {
 			$this->redirect('/site/hello');
 		}
 		
-		$oStat = new UserStat( User::model()->findByPk(Yii::app()->user->getId()) );
+		$oStat = new UserStat( Yii::app()->user->getModel() );
 		
 		$aStat = $oStat->getStat();
+		
+		$aGames = $oStat->getGamesStat();
 		
 		$this->render(
 			'index',
 			array(
-				'aStat' => $aStat
+				'aStat' => $aStat,
+				'aGames' => $aGames,
 			)
 		);
 	}
@@ -127,6 +130,7 @@ class SiteController extends Controller {
                 
                 //$form->attributes = $_POST['User'];
 				$form->email = $_POST['RegisterForm']['email'];
+				$form->nickname = $_POST['RegisterForm']['nickname'];
 				$form->password = $_POST['RegisterForm']['password'];
 				$form->password2 = $_POST['RegisterForm']['password2'];
 				

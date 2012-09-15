@@ -7,7 +7,7 @@
 // CWebApplication properties can be configured here.
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
-	'name'=>'p2k.cc',
+	'name'=>'AlcoEuro',
 
 	// preloading 'log' component
 	'preload'=>array(
@@ -41,6 +41,7 @@ return array(
 	// application components
 	'components'=>array(
 		'user'=>array(
+			'class' => 'WebUser',
 			// enable cookie-based authentication
 			'allowAutoLogin'=>true,
 		),
@@ -71,7 +72,7 @@ return array(
 				'<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
 				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
 			),
-			'showScriptName'=>false
+			'showScriptName'=>false,
 		),
 		/*
 		'db'=>array(
@@ -112,6 +113,10 @@ return array(
 			),
 		),
 
+		'errorHandler'=>array(
+			'errorAction'=>'/',
+		),
+		
 	),
 
 	// application-level parameters that can be accessed

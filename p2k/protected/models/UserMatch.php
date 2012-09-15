@@ -52,8 +52,6 @@ class UserMatch extends CActiveRecord
 		);
 	}
 
-	
-	
 	/**
 	 * @return array customized attribute labels (name=>label)
 	 */
@@ -90,7 +88,7 @@ class UserMatch extends CActiveRecord
 	}
 	
 	/**
-	 * Проверка результата
+	 * Пользователь угадал результат?
 	 * @return string
 	 */
 	public function checkMatch(){
@@ -117,18 +115,53 @@ class UserMatch extends CActiveRecord
 	 * @param integer $iUserId
 	 * @return array
 	 */
-	public static function getUserMatches( $iUserId ){
+	public static function getUserMatches( $iUserId, $oGame = null ){
+
+		$aUserMatches = array();
 		
-		$aMatches = UserMatch::model()->findAllByAttributes(
-			array( 'user_id' => $iUserId ),
-			array( 'index'	=> 'match_id' )
-		);
-		
-		return $aMatches;
+		if( $iUserId > 0 ){
+			if( $oGame === null ){
+				$aUserMatches = UserMatch::model()->findAllByAttributes(
+					array( 'user_id' => $iUserId ),
+					array( 'index'	=> 'match_id' )
+				);	
+			} else {
+			
+				$aMatches = Match::model()->findAllByAttributes(
+					array(),
+					array( 
+						'index'	=> 'id',
+						'condition' => "date >= '".$oGame->create_time."'",
+					)
+				);
+					
+				if(empty($aMatches)){
+					return $aUserMatches;
+				}
+				
+				$aMatchIds = array_keys($aMatches);
+				
+				
+				
+				
+				$sMatchIds = implode(',', $aMatchIds);
+				
+				$aUserMatches = UserMatch::model()->findAllByAttributes(
+					array( 
+						'user_id' => $iUserId
+					),
+					array( 
+						'index'	=> 'match_id',
+						'condition' => 'match_id IN ('. $sMatchIds.')',
+					)
+				);	
+			}
+			
+		}
+	
+		return $aUserMatches;
 	}
-	
-	
-	
+
 }
 
 ?>

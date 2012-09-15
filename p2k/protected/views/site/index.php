@@ -7,12 +7,13 @@
 	</li>
 </ul>
 
+<a href="/game/new">Создать игру</a>
 <br/>
-
+<br/>
 
 <table class="table">
 	<tr>
-		<th>Вскго ставок</th>
+		<th>Всего ставок</th>
 		<th>Угадано</th>
 		<th>Ничьи</th>
 	</tr>
@@ -23,3 +24,25 @@
 	</tr>	
 </table>
         
+<br/>
+<?php
+if(!empty($aGames)){
+	foreach($aGames as $aGame){
+		?>
+			<p><b><?=$aGame['name']?></b></p>
+			<table class="table">
+				<tr>
+					<th>Всего ставок</th>
+					<th>Угадано</th>
+				</tr>
+				<tr>
+					<td><?=$aGame['all']?></td>
+					<td><?=$aGame['win']?></td>
+				</tr>	
+			</table>
+			<br/>
+		<?php
+	}
+}
+
+?>

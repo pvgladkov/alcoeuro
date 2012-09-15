@@ -20,6 +20,13 @@
 	</div>
 		 
 	<div class="row">
+		 <!-- Выводим поле для логина !-->
+		<?=$_form->labelEx( $form, 'nickname' ); ?>
+		<?=$_form->textField( $form, 'nickname' ) ?>
+		<?=$_form->error( $form, 'nickname' ) ?>
+	</div>
+	
+	<div class="row">
 		<!-- Выводим поле для пароля !-->
 		<?=$_form->labelEx( $form, 'password' ); ?>
 		<?=$_form->passwordField( $form, 'password' ) ?>

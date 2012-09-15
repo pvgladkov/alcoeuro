@@ -45,7 +45,7 @@ class User extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array( 'email', 'safe' ),
+			array( 'email, nickname', 'safe' ),
 		);
 	}
 
@@ -140,10 +140,33 @@ class User extends CActiveRecord
 		return $this;
 	}
 	
+	public function scopeNickname( $sNick ){
+			
+		$this->getDbCriteria()->mergeWith(array(
+			'condition' => "`nickname` = '$sNick'",
+		));
+		
+		return $this;
+	}
+	
+	/**
+	 * 
+	 * @return User
+	 */
 	public function scopeNotDeleted() {
 
 		return $this;
 	}	
+	
+	/**
+	 * 
+	 */
+	public function getName(){
+		if( $this->name ){
+			return $this->nickname;
+		}
+		return $this->email;
+	}
 }
 
 ?>
