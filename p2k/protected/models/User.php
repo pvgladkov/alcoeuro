@@ -162,7 +162,7 @@ class User extends CActiveRecord
 	 * 
 	 */
 	public function getName(){
-		if( $this->name ){
+		if( $this->nickname ){
 			return $this->nickname;
 		}
 		return $this->email;
