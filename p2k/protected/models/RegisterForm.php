@@ -35,8 +35,8 @@ class RegisterForm extends CFormModel {
 		return array(
 			'email'=>'Email',
 			'nickname' => 'Username',
-			'password' => 'Password',
-			'password2' => 'Password'
+			'password' => 'пароль',
+			'password2' => 'повторите пароль'
 		);
 	}
 	

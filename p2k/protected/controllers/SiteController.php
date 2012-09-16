@@ -133,14 +133,19 @@ class SiteController extends Controller {
 				$form->nickname = $_POST['RegisterForm']['nickname'];
 				$form->password = $_POST['RegisterForm']['password'];
 				$form->password2 = $_POST['RegisterForm']['password2'];
-				
 				if( $form->validate( 'register' ) ) {
 
 					// Выводим страницу что "все окей"
 					$oUser = new User();
 					$oUser->attributes = $form->attributes;
 					$oUser->save();
-					$this->redirect( '/' );                     
+					$oLoginForm = new LoginForm;
+					$oLoginForm->username = $form->email;
+					$oLoginForm->password = $form->password;
+					if( $oLoginForm->validate() ){
+						$oLoginForm->login();
+					}
+					$this->redirect( '/site' );                     
 				} else {
 
 					$this->render( "register", array( 'form' => $form ) );
