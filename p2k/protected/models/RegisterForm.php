@@ -24,6 +24,7 @@ class RegisterForm extends CFormModel {
 			array( 'password2', 'confirmPassword'),
 			array( 'email', 'unique'),
 			array( 'nickname', 'uniqueUsername'),
+			array( 'email, nickname, password', 'length', 'min' => 5)
 		);
 	}
 
