@@ -34,7 +34,7 @@ class SiteController extends Controller {
 	public function actionIndex(){
 		
 		if( Yii::app()->user->isGuest ){
-			$this->redirect('/site/hello');
+			$this->redirect('/hello');
 		}
 		
 		$oStat = new UserStat( Yii::app()->user->getModel() );
@@ -66,7 +66,7 @@ class SiteController extends Controller {
 	public function actionTable(){
 
 		if( Yii::app()->user->isGuest ){
-			$this->redirect('/site/hello');
+			$this->redirect('/hello');
 		}
 		
 		$this->render( 'table', array() );

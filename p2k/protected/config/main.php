@@ -68,9 +68,17 @@ return array(
 			'urlSuffix'=>'/',
 			'rules'=>array(
 				'' => 'site/index',
-				'<controller:\w+>/<id:\d+>'=>'<controller>/view',
+				'<controller:\w+>/<id:\d+>'=>'<controller>/index',
 				'<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
 				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
+				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
+				
+				
+				'hello'	=> 'site/hello',
+				'about'	=> 'site/about',
+				'login'	=> 'site/login',
+				'logout'	=> 'site/logout',
+				'register'	=> 'site/register',
 			),
 			'showScriptName'=>false,
 		),

@@ -3,7 +3,7 @@
 <br/>
 <ul class="nav nav-pills">
 	<li class="active">
-		<a href="/comp/index/1">Лига чемпионов</a>
+		<a href="/comp/1">Лига чемпионов</a>
 	</li>
 </ul>
 

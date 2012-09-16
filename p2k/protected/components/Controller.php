@@ -46,7 +46,7 @@ class Controller extends CController
 				'class'=>'bootstrap.widgets.BootMenu',
 				'htmlOptions'=>array('class'=>'pull-right'),
 				'items'=>array(
-					array('label'=>'Login', 'url'=>'/site/login'),
+					array('label'=>'Login', 'url'=>'/login'),
 				),
 			);
 
@@ -70,7 +70,7 @@ class Controller extends CController
 	public $aUrls = array(
 		//array('label'=>'Home', 'url'=>'/', 'active'=>false),
 		array('label'=>'Алкорейтинг', 'url'=>'/site/table', 'active'=>false),
-		array('label'=>'О нас', 'url'=>'/site/about', 'active'=>false),	
+		array('label'=>'О нас', 'url'=>'/about', 'active'=>false),	
 	);
 
 	/**
