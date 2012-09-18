@@ -20,7 +20,8 @@ class UserStat extends CComponent{
 		$aAll = UserMatch::getUserMatches( $this->oUser->id );
 		
 		$aReturn = array(
-			'all' => count( $aAll ),
+			'username' => $this->oUser->getName(),
+			'all'=> count( $aAll ),
 			'win' => 0,
 			'tie' => 0,
 		);

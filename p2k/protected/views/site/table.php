@@ -9,17 +9,17 @@
 
 <?php if( !empty($aStat) ) { ?>
 
-	<table class="tabel">
+	<table class="tabel table-bordered table-striped">
 		<tr>
 			<th>Имя</th>
-			<th>Сделано ставок</th>
 			<th>Угадано</th>
 		</tr>
-		<tr>
-			<td></td>
-			<td></td>
-			<td></td>
-		</tr>	
+		<?php foreach( $aStat as $aItem ) {?>
+			<tr>
+				<td><?=$aItem['username']?></td>
+				<td><?=$aItem['win']?></td>
+			</tr>
+		<?php }?>
 	</table>
 <?php } ?>
 <br />
