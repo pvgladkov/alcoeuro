@@ -15,12 +15,10 @@
 	<tr>
 		<th>Всего ставок</th>
 		<th>Угадано</th>
-		<th>Ничьи</th>
 	</tr>
 	<tr>
 		<td><?=$aStat['all']?></td>
 		<td><?=$aStat['win']?></td>
-		<td><?=$aStat['tie']?></td>
 	</tr>	
 </table>
         

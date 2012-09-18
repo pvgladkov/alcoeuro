@@ -17,12 +17,19 @@ class UserStat extends CComponent{
 	 */
 	public function getStat(){
 		
+		$iWin = 0;
 		$aAll = UserMatch::getUserMatches( $this->oUser->id );
+		
+		foreach( $aAll as $oUserMatch ){
+			if( $oUserMatch->checkMatch() == 'yes' ){
+				$iWin++;
+			}
+		}
 		
 		$aReturn = array(
 			'username' => $this->oUser->getName(),
 			'all'=> count( $aAll ),
-			'win' => 0,
+			'win' => $iWin,
 			'tie' => 0,
 		);
 		
