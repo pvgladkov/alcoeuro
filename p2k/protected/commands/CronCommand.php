@@ -26,7 +26,10 @@ class CronCommand extends CConsoleCommand{
 				strtotime($oMatch->date)+90*60 < date(mktime())
 
 			){
-				$sUrl = 'http://yandex.ru/yandsearch?text='.$oMatch->home.'+'.$oMatch->away;
+				
+				$oHome = Team::model()->findByPk($oMatch->home_id);
+				$oAway = Team::model()->findByPk($oMatch->away_id);
+				$sUrl = 'http://yandex.ru/yandsearch?text='.$oHome->name.'+'.$oAway->name;
 				echo $sUrl."\n";
 				$html = file_get_html($sUrl); 
 		
