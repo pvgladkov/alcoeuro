@@ -45,6 +45,7 @@ return array(
 			// enable cookie-based authentication
 			'allowAutoLogin'=>true,
 		),
+		
 		'bootstrap'=>array(
 			'class'	=>'ext.bootstrap.components.Bootstrap', // assuming you extracted bootstrap under extensions
 			'coreCss'	=>true, // whether to register the Bootstrap core CSS (bootstrap.min.css), defaults to true
@@ -61,6 +62,8 @@ return array(
 				),
 			),
 		),
+		
+		
 		// uncomment the following to enable URLs in path-format
 		
 		'urlManager'=>array(
@@ -79,6 +82,7 @@ return array(
 				'login'	=> 'site/login',
 				'logout'	=> 'site/logout',
 				'register'	=> 'site/register',
+				'table'		=> 'site/table',
 			),
 			'showScriptName'=>false,
 		),

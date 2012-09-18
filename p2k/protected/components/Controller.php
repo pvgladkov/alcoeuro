@@ -46,7 +46,7 @@ class Controller extends CController
 				'class'=>'bootstrap.widgets.BootMenu',
 				'htmlOptions'=>array('class'=>'pull-right'),
 				'items'=>array(
-					array('label'=>'Login', 'url'=>'/login'),
+					array('label'=>'Войти', 'url'=>'/login'),
 				),
 			);
 
@@ -55,7 +55,7 @@ class Controller extends CController
 				'class'=>'bootstrap.widgets.BootMenu',
 				'htmlOptions'=>array('class'=>'pull-right'),
 				'items'=>array(
-					array('label'=>'Logout', 'url'=>'/site/logout'),
+					array('label'=>'Выйти', 'url'=>'/logout'),
 				),
 			);
 		}
@@ -69,7 +69,7 @@ class Controller extends CController
 	 */
 	public $aUrls = array(
 		//array('label'=>'Home', 'url'=>'/', 'active'=>false),
-		array('label'=>'Алкорейтинг', 'url'=>'/site/table', 'active'=>false),
+		array('label'=>'Алкорейтинг', 'url'=>'/table', 'active'=>false),
 		array('label'=>'О нас', 'url'=>'/about', 'active'=>false),	
 	);
 
@@ -79,7 +79,7 @@ class Controller extends CController
 	 */
 	public function filterIsGuest( $filterChain ){
 		if( Yii::app()->user->isGuest ){
-			$this->redirect('/site/hello');
+			$this->redirect('/hello');
 		}
 		$filterChain->run();
 	}

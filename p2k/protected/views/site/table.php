@@ -3,13 +3,24 @@
 <br />
 <br />
 <br />
-<h2>Алкорейтинг</h2>
+<div class="page-header">
+	<h2>Алкорейтинг</h2>
+</div>
 
-<table class="tabel table-bordered table-striped">
+<?php if( !empty($aStat) ) { ?>
 
-	
-
-</table>
-
+	<table class="tabel">
+		<tr>
+			<th>Имя</th>
+			<th>Сделано ставок</th>
+			<th>Угадано</th>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>	
+	</table>
+<?php } ?>
 <br />
 

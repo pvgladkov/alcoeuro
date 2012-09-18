@@ -20,7 +20,7 @@ class RegisterForm extends CFormModel {
 	public function rules(){
 		return array(
 			// username and password are required
-			array( 'email, password, password2', 'required' ),
+			array( 'email, nickname, password, password2', 'required' ),
 			array( 'password2', 'confirmPassword'),
 			array( 'email', 'unique'),
 			array( 'nickname', 'uniqueUsername'),

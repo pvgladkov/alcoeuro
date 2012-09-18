@@ -16,6 +16,25 @@
 	<script src="/js/jquery.min.js"></script>
 	<script src="/js/script.js"></script>
 	
+	<?php
+	/**
+	<!-- gumby CSS framework -->
+	<script src="/js/plugins.js"></script>
+	<script src="/js/libs/gumby.min.js"></script>
+	<script src="/js/libs/modernizr-2.0.6.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/gumby/ui.css" />
+	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/gumby/text.css" />
+	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/gumby/style.css" />
+	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/gumby/imports.css" />
+	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/gumby/import16.css" />
+	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/gumby/import12.css" />
+	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/gumby/gumby.hybrid.css" />
+	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/gumby/gumby.16col.css" />
+	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/gumby/gumby.12col.css" />
+	<!-- -->
+	*/
+	?>
+
 	<link href="/images/avatar_6b2e3101695b_16.png" rel="shortcut icon" />
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
 	
@@ -41,16 +60,16 @@
 
 	<?php 
 	$this->widget('bootstrap.widgets.BootNavbar', array(
-		'fixed'=>true,
-		'brand'=> CHtml::encode(Yii::app()->name),
-		'brandUrl'=>'/',
-		'collapse'=>true, // requires bootstrap-responsive.css
-		'items'=>$this->getMenu()
+		'fixed'		=>true,
+		'brand'		=> CHtml::encode(Yii::app()->name),
+		'brandUrl'	=>'/',
+		'collapse'	=>true, // requires bootstrap-responsive.css
+		'items'		=>$this->getMenu()
 
 	)); 
 	?>
 
-
+	
 	
 	
 	<?php echo $content; ?>

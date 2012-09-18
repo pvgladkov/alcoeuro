@@ -69,7 +69,14 @@ class SiteController extends Controller {
 			$this->redirect('/hello');
 		}
 		
-		$this->render( 'table', array() );
+		$aStat = array();
+		
+		$this->render( 
+			'table', 
+			array(	
+				'aStat' => $aStat
+			) 
+		);
 	}
 		
 	/**

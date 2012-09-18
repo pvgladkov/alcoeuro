@@ -14,24 +14,23 @@ $this->breadcrumbs=array(
 		'validateOnSubmit'=>true,
 	),
 )); ?>
+	<?php CHtml::$afterRequiredLabel = '';?>
+	<div class="row">
+		<h3><?= $form->labelEx( $model,'username' ); ?></h3>
+		<?= $form->textField( $model,'username' ); ?>
+		<?= $form->error( $model,'username' ); ?>
+	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx( $model,'username' ); ?>
-		<?php echo $form->textField( $model,'username' ); ?>
-		<?php echo $form->error( $model,'username' ); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'password'); ?>
-		<?php echo $form->passwordField($model,'password'); ?>
-		<?php echo $form->error($model,'password'); ?>
+		<h3><?= $form->labelEx($model,'password'); ?></h3>
+		<?= $form->passwordField($model,'password'); ?>
+		<?= $form->error($model,'password'); ?>
 
 	</div>
 
-	<div class="row buttons">
-		<?php echo CHtml::submitButton('Login'); ?>
-		<?php echo CHtml::link('Регистрация', '/register')?>
-	</div>
+		<button type="submit" class="btn btn-primary">Войти</button>
+		<a class="btn" href="/register">Регистрация</a>
+	
 
 <?php $this->endWidget(); ?>
 </div><!-- form -->
