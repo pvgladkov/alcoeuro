@@ -9,7 +9,7 @@
 	</tr>
 	<?php foreach( $aStat as $aItem ) {?>
 		<tr>
-			<td><?=$aItem['username']?></td>
+			<td><a href="/user/<?=$aItem['userid']?>"><?=$aItem['username']?></a></td>
 			<td><?=$aItem['win']?></td>
 		</tr>
 	<?php }?>

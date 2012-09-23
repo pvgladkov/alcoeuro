@@ -27,6 +27,7 @@ class UserStat extends CComponent{
 		}
 		
 		$aReturn = array(
+			'userid' => $this->oUser->id,
 			'username' => $this->oUser->getName(),
 			'all'=> count( $aAll ),
 			'win' => $iWin,

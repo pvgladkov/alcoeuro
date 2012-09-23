@@ -25,15 +25,19 @@ class CompController extends Controller{
 					 'condition'=>"competition_id=$id",
 				),
 				'pagination'	=> array(
-					'pageSize' => 30,
+					'pageSize' => 16,
 				)
 			)
 		);
 		
-		$this->render('index', array(
-			'oMatchList'	=> $oMatchList,
-			'aSt'			=> array(),
-		));
+		$this->render(
+			'index',
+			array(
+				'sTitle'		=> 'Групповой этап',
+				'oMatchList'	=> $oMatchList,
+				'aSt'			=> array(),
+			)
+		);
 	}
 }
 ?>
