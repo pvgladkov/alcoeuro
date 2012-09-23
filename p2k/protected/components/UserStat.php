@@ -83,8 +83,25 @@ class UserStat extends CComponent{
 	 */
 	public static function getTotalStat( Game $oGame = null ){
 		$aStat = array();
+		$aUsers = array();
+		if( $oGame == null ){
+			$aUsers = User::model()->findAll();
+		} else {
+			$aGameUsers = GameUser::model()->findAllByAttributes(
+				array(
+					'game_id' => $oGame->id
+				), 
+				array(
+					'index' => 'user_id'
+				)
+			);
+			if( !empty($aGameUsers) ){
+				$aUsersIds = array_keys( $aGameUsers );
+				$aUsers = User::model()->findAllByPk( $aUsersIds );
+			}
+		}
 		
-		$aUsers = User::model()->findAll();
+		
 		foreach( $aUsers as $oUser ){
 			$oStat = new UserStat( $oUser );
 			$aStat[ $oUser->getName() ] = $oStat->getStat( $oGame );
