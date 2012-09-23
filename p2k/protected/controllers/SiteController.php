@@ -39,8 +39,10 @@ class SiteController extends Controller {
 		
 		$oStat = new UserStat( Yii::app()->user->getModel() );
 		
+		// статистика пользователя общая
 		$aStat = $oStat->getStat();
 		
+		// данные по играм
 		$aGames = $oStat->getGamesStat();
 		
 		$this->render(
@@ -69,19 +71,7 @@ class SiteController extends Controller {
 			$this->redirect('/hello');
 		}
 		
-		$aStat = array();
-		
-		$aUsers = User::model()->findAll();
-		foreach( $aUsers as $oUser ){
-			$oStat = new UserStat( $oUser );
-			$aStat[ $oUser->getName() ] = $oStat->getStat();
-		}
-		
-		usort( $aStat, function($a, $b){
-			if ($a['win'] == $b['win']) return 0;
-				return ($a['win'] > $b['win']) ? -1 : 1;
-			}
-		);
+		$aStat = UserStat::getTotalStat();
 		
 		$this->render( 
 			'table', 

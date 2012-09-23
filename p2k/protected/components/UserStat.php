@@ -15,10 +15,10 @@ class UserStat extends CComponent{
 	/**
 	 * 
 	 */
-	public function getStat(){
+	public function getStat( Game $oGame = null ){
 		
 		$iWin = 0;
-		$aAll = UserMatch::getUserMatches( $this->oUser->id );
+		$aAll = UserMatch::getUserMatches( $this->oUser->id, $oGame );
 		
 		foreach( $aAll as $oUserMatch ){
 			if( $oUserMatch->checkMatch() == 'yes' ){
@@ -40,11 +40,12 @@ class UserStat extends CComponent{
 	 * Получить статистику по играм пользователя
 	 */
 	public function getGamesStat(){
+		
 		$aReturn = array();
-		$aGameIds = GameUser::getUserGames($this->oUser->id);
-		$aGames = Game::model()->findAllByPk($aGameIds);
+		$aGameIds = GameUser::getUserGames( $this->oUser->id );
+		$aGames = Game::model()->findAllByPk( $aGameIds );
 		foreach( $aGames as $oGame ){
-			$aReturn[$oGame->id] = $this->getGameStat($oGame);
+			$aReturn[$oGame->id] = $this->getTotalStat( $oGame );
 		}
 		return $aReturn;
 	}
@@ -73,6 +74,29 @@ class UserStat extends CComponent{
 		);
 		
 		return $aReturn;
+	}
+	
+	/**
+	 * Турнираня таблица
+	 * @param Game $oGame
+	 * @return type
+	 */
+	public static function getTotalStat( Game $oGame = null ){
+		$aStat = array();
+		
+		$aUsers = User::model()->findAll();
+		foreach( $aUsers as $oUser ){
+			$oStat = new UserStat( $oUser );
+			$aStat[ $oUser->getName() ] = $oStat->getStat( $oGame );
+		}
+		
+		usort( $aStat, function($a, $b){
+			if ($a['win'] == $b['win']) return 0;
+				return ($a['win'] > $b['win']) ? -1 : 1;
+			}
+		);
+		
+		return $aStat;
 	}
 	
 }

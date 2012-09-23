@@ -24,22 +24,16 @@
         
 <br/>
 <?php
-if(!empty($aGames)){
-	foreach($aGames as $aGame){
-		?>
-			<p><b><?=$aGame['name']?></b></p>
-			<table class="table">
-				<tr>
-					<th>Всего ставок</th>
-					<th>Угадано</th>
-				</tr>
-				<tr>
-					<td><?=$aGame['all']?></td>
-					<td><?=$aGame['win']?></td>
-				</tr>	
-			</table>
-			<br/>
-		<?php
+if(!empty( $aGames )){
+	foreach($aGames as $iKey => $aGame){
+		$oGame = Game::model()->findByPk( $iKey );
+		$this->renderPartial(
+			'_table',
+			array(
+				'aStat' => $aGame,
+				'sGameName' => $oGame->nickname
+			)
+		);
 	}
 }
 
