@@ -2,15 +2,12 @@
 
 $oUserMatch = null;
 
-if( !Yii::app()->user->isGuest ){
-
-	$oUserMatch = UserMatch::model()->findByAttributes(
-		array(
-			'match_id'	=> $data->id,
-			'user_id'	=> Yii::app()->user->getId()
-		)
-	);
-}
+$oUserMatch = UserMatch::model()->findByAttributes(
+	array(
+		'match_id'	=> $data->id,
+		'user_id'	=> $oUser->id
+	)
+);
 
 $sLabelClass = 'label-info';
 
@@ -21,7 +18,7 @@ $aBet = array(
 
 if( $oUserMatch ){
 	
-	$aBet[ $oUserMatch->bet ] = Yii::app()->user->getName();
+	$aBet[ $oUserMatch->bet ] = $oUser->getName();
 	$oMatch = Match::model()->findByPk( $data->id );
 	if(strtotime( $oMatch->date )+90*60 < date( mktime() ) ){
 		if( $oUserMatch->checkMatch() == 'yes' ){

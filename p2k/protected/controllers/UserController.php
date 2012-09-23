@@ -28,6 +28,7 @@ class UserController extends Controller{
 			$this->render(
 				'index',
 				array(
+					'oUser' => $oUser,
 					'sTitle' => $sTitle,
 				)
 			);
@@ -54,6 +55,7 @@ class UserController extends Controller{
 		$this->render(
 			'/comp/index',
 			array(
+				'oUser' => $oUser,
 				'sTitle' => $sTitle,
 				'oMatchList'	=> $oMatchList,
 				'aSt'			=> array(),

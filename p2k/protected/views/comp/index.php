@@ -23,6 +23,9 @@
 				jQuery('.tooltip').remove();
 				jQuery('a[rel=tooltip]').tooltip();
 			}",
+			'viewData' => array(
+				'oUser' => $oUser
+			),
 		)); 
 
 		?>
