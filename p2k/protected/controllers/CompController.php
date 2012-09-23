@@ -33,6 +33,7 @@ class CompController extends Controller{
 		$this->render(
 			'index',
 			array(
+				'oUser'		=> Yii::app()->user->getModel(),
 				'sTitle'		=> 'Групповой этап',
 				'oMatchList'	=> $oMatchList,
 				'aSt'			=> array(),
