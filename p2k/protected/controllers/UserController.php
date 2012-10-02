@@ -43,7 +43,7 @@ class UserController extends Controller{
 			'Match',
 			array(
 				'criteria'	=> array(
-					 'condition'=>"id IN ( $sUserMatches ) AND date <= '$s' AND get_result=1",
+					 'condition'=>"id IN ( $sUserMatches ) AND get_result=1",
 				),
 				'pagination'	=> array(
 					'pageSize' => 16,
