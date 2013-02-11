@@ -30,11 +30,16 @@ class CompController extends Controller{
 			)
 		);
 		
+		$sTitle = $oMatchList->data[0]->id > 96 ?
+			'Плэй-офф':
+			'Групповой этап'
+		;
+		
 		$this->render(
 			'index',
 			array(
 				'oUser'		=> Yii::app()->user->getModel(),
-				'sTitle'		=> 'Групповой этап',
+				'sTitle'		=> $sTitle,
 				'oMatchList'	=> $oMatchList,
 				'aSt'			=> array(),
 			)
